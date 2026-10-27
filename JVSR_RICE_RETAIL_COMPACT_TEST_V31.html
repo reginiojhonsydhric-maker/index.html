@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>JVSR RICE RETAIL — Compact Firebase Test V18</title>
+<style>
+:root{--navy:#142d4e;--blue:#2563eb;--green:#16a36a;--bg:#f3f6fb;--text:#1f2937;--muted:#718096;--line:#e5eaf2;--card:#fff;--shadow:0 8px 26px rgba(24,45,75,.07)}
+*{box-sizing:border-box;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}body{margin:0;background:var(--bg);color:var(--text);padding:0 14px 36px;max-width:none}.header{display:flex;align-items:center;gap:12px;text-align:left;margin:0 -14px 12px;padding:17px 18px;background:linear-gradient(135deg,#142d4e,#214d78);color:white;box-shadow:0 4px 16px #142d4e20}.store-name{font-size:20px;font-weight:850;letter-spacing:.2px;color:white}.store-sub{font-size:12px;color:#dbeafe;margin-top:3px}.date{color:var(--muted);text-align:left;margin:10px 2px 16px;font-size:13px}.menu-toggle{width:44px;min-width:44px;height:44px;padding:0;margin:0;border-radius:12px;background:#ffffff1c;color:white;font-size:23px}.drawer-scrim{display:none;position:fixed;inset:0;background:#0b1728a8;z-index:90}.drawer{position:fixed;z-index:100;left:0;top:0;bottom:0;width:270px;max-width:82vw;padding:18px 13px;background:#142d4e;color:white;transform:translateX(-105%);transition:transform .22s ease;box-shadow:12px 0 35px #10233b30;overflow-y:auto}.drawer.open{transform:translateX(0)}.drawer-scrim.open{display:block}.drawer-brand{font-size:17px;font-weight:850;padding:8px 10px 20px;line-height:1.3}.drawer-brand small{display:block;color:#a9c6e8;font-size:11px;font-weight:500;margin-top:5px}.drawer .tab{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:0;border-radius:11px;background:transparent;color:#d9e6f5;padding:13px 12px;margin:3px 0;font-size:14px;font-weight:650}.drawer .tab.active,.drawer .tab:hover{background:#ffffff1b;color:white}.drawer .tab.active{box-shadow:inset 3px 0 #61d7a0}.page{max-width:980px;margin:0 auto}.card{background:var(--card);border:1px solid #e9edf4;border-radius:18px;padding:17px;margin-bottom:14px;box-shadow:var(--shadow)}h2{font-size:16px;margin:2px 0 13px;color:var(--navy);letter-spacing:-.2px}input,select,button{width:100%;padding:12px;margin:5px 0;border:1px solid #dce3ee;border-radius:11px;font-size:14px;background:white;color:var(--text)}input:focus,select:focus{outline:2px solid #bfdbfe;border-color:#60a5fa}button{border:0;background:var(--green);color:white;font-weight:750;cursor:pointer;box-shadow:0 3px 8px #16a36a18}.blue{background:var(--blue)}.orange{background:#e69a18}.red,.del{background:#dc4c4c}.hidden{display:none!important}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.metric{padding:15px 10px;text-align:left;border-radius:14px;font-weight:800;min-width:0;overflow-wrap:anywhere;border:1px solid #edf1f7}.metric div:first-child{font-size:12px;line-height:1.35;margin-bottom:8px;font-weight:650}.metric div:last-child{font-size:19px}.sales{background:#eafaf1;color:#167449;grid-column:span 2}.profit{background:#fff7e6;color:#a65b00}.cashin{background:#edf5ff;color:#1d4ed8}.cashout{background:#fff0f0;color:#b42323}.gcash{background:#f6efff;color:#7e22ce}.credit{background:#eef2ff;color:#3730a3}.load{background:#fff7e6;color:#a65b00}.small,.muted{font-size:12px;color:var(--muted);line-height:1.55}.note{background:#fff8dc;color:#8a6500;padding:11px;border-radius:10px;font-size:13px;margin-bottom:10px}table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px}th,td{text-align:left;padding:10px 7px;border-bottom:1px solid var(--line);overflow-wrap:anywhere}th{background:#f7f9fc;color:#4b5c73}.table-wrap{overflow-x:auto}.del{width:auto;padding:6px 9px;font-size:12px}.item{padding:12px;border-left:3px solid var(--green);background:#f8fafc;margin:8px 0;border-radius:8px}.row{display:grid;grid-template-columns:1fr 1fr;gap:8px}.result{background:#f6efff;padding:11px;border-radius:10px;margin:8px 0}.pill{font-size:11px;color:var(--muted)}.admin-lock{background:#fff8e1;border:1px solid #ffe082;padding:12px;border-radius:11px}.admin-table button{margin:2px 0}.admin-actions{display:flex;gap:5px}.admin-actions button{width:auto;flex:1;padding:7px;font-size:12px}.product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.product-grid>.card{margin-bottom:0}.section-kicker{font-size:11px;font-weight:800;color:#6b7c93;text-transform:uppercase;letter-spacing:1px;margin:0 0 10px 2px}.cash-float-card{border:1px solid #b7e5ce;background:linear-gradient(135deg,#f0fff6,#fff);}.cash-float-card h2{color:#167449}.bottom-actions{margin-top:18px}.daily-record{border:1px solid var(--line);border-radius:13px;background:#fff;margin:9px 0;overflow:hidden}.daily-record summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px 14px;cursor:pointer;list-style:none;background:#f8fafc}.daily-record summary::-webkit-details-marker{display:none}.daily-record summary span:first-child{display:flex;flex-direction:column;gap:4px;min-width:0}.daily-record summary small{font-size:11px;color:var(--muted);font-weight:500}.record-chevron{font-size:20px;color:var(--muted);transition:transform .15s}.daily-record[open] .record-chevron{transform:rotate(180deg)}.daily-record-body{padding:12px}.record-balances{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.record-balances>div{display:flex;flex-direction:column;gap:5px;padding:10px;border-radius:9px;background:#f4f7fb}.record-balances small{font-size:11px;color:var(--muted)}.record-balances strong{font-size:14px;color:var(--navy)}.daily-record-body h3{font-size:14px;color:var(--navy);margin:15px 0 6px}.summary-details{background:#fff;border:1px solid #e9edf4;border-radius:14px;margin:10px 0 12px;box-shadow:var(--shadow);overflow:hidden}.summary-details>summary{padding:14px 15px;font-weight:800;color:var(--navy);cursor:pointer;background:#f8fafc;list-style:none}.summary-details>summary::-webkit-details-marker{display:none}.summary-details>summary:after{content:"＋";float:right;color:var(--muted)}.summary-details[open]>summary:after{content:"−"}.summary-details-body{padding:12px}.cash-check{border:1px solid #c7d9f4;background:#f5f9ff}.cash-check-result{padding:12px;border-radius:11px;background:#eef2ff;color:#3730a3;font-weight:800;margin-top:8px}.cash-check-result.over{background:#eafaf1;color:#167449}.cash-check-result.short{background:#fff0f0;color:#b42323}.closing-note{min-height:92px;resize:vertical;width:100%;padding:12px;border:1px solid #dce3ee;border-radius:11px;font:inherit}.bottom-actions{display:grid;grid-template-columns:1fr;gap:8px}.bottom-actions button{margin:0}.metric[style*="grid-column:span 2"]{grid-column:span 2}
+@media(min-width:900px){body{padding:0 26px 40px}.header{margin:0 -26px 14px;padding:20px 28px}.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){body{padding:0 10px 28px}.header{margin:0 -10px 10px;padding:14px 12px}.store-name{font-size:18px}.grid{gap:8px}.metric{padding:12px 9px}.metric div:last-child{font-size:17px}.card{padding:14px;border-radius:15px}.row{gap:6px}.product-grid{grid-template-columns:1fr}}
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyAgWZzOv9Lyydpb1d3w1o6L9BG6xg1ZAkY",
+  authDomain: "jvsr-rice-retail.firebaseapp.com",
+  projectId: "jvsr-rice-retail",
+  storageBucket: "jvsr-rice-retail.firebasestorage.app",
+  messagingSenderId: "787121975396",
+  appId: "1:787121975396:web:0180402fb0198bbc89af71",
+  measurementId: "G-PNRJYBFT8Y"
+};
+const JVSR_ALLOWED_UIDS = ["z5VN5tbrYwcRGpjyHVMx9EtET882", "UglMOqq2UJWO8kdqMG3jHkTMFtE3"];
+let jvsrCloudDb = null, jvsrCloudUser = null, jvsrCloudUnsub = null, jvsrApplyingCloud = false;
+function jvsrAuthMessage(msg, isError=false){ const el=document.getElementById('jvsrAuthMessage'); if(el){el.textContent=msg;el.style.color=isError?'#b91c1c':'#334155';} }
+function jvsrShowApp(show){ const el=document.getElementById('jvsrAuthGate'); if(el)el.style.display=show?'none':'flex'; const bar=document.getElementById('jvsrSessionBar');if(bar)bar.style.display=show?'flex':'none';if(show&&jvsrCloudUser){const t=document.getElementById('jvsrSessionText');if(t)t.textContent='Signed in as '+jvsrCloudUser.email+' · shared sync active';} }
+async function jvsrForgotPassword(){ const email=document.getElementById('jvsrEmail').value.trim(); if(!email){jvsrAuthMessage('Enter your registered email address first.',true);document.getElementById('jvsrEmail').focus();return;} try{await firebase.auth().sendPasswordResetEmail(email);jvsrAuthMessage('Password reset email sent. Check your inbox and spam folder.');}catch(e){console.error(e);jvsrAuthMessage('Could not send reset email. Check the address and Firebase email settings.',true);} }
+async function jvsrLogin(){ const email=document.getElementById('jvsrEmail').value.trim(), password=document.getElementById('jvsrPassword').value; if(!email||!password){jvsrAuthMessage('Enter your email and password.',true);return;} const btn=document.getElementById('jvsrLoginBtn');btn.disabled=true;btn.textContent='Signing in…';try{await firebase.auth().signInWithEmailAndPassword(email,password);}catch(e){jvsrAuthMessage('Sign-in failed. Check the email and password, then try again.',true);}finally{btn.disabled=false;btn.textContent='Sign in';} }
+async function jvsrLogout(){try{if(jvsrCloudUnsub)jvsrCloudUnsub();await firebase.auth().signOut();}catch(e){} }
+function jvsrCleanFirestoreValue(value){if(value===undefined)return undefined;if(value===null||typeof value!=='object')return value;if(Array.isArray(value))return value.map(v=>jvsrCleanFirestoreValue(v)===undefined?null:jvsrCleanFirestoreValue(v));const clean={};for(const [key,val] of Object.entries(value)){const safe=jvsrCleanFirestoreValue(val);if(safe!==undefined)clean[key]=safe;}return clean;}
+function jvsrCloudSave(currentState){ if(!jvsrCloudDb||!jvsrCloudUser||jvsrApplyingCloud||!JVSR_ALLOWED_UIDS.includes(jvsrCloudUser.uid))return Promise.resolve(false); const safeState=jvsrCleanFirestoreValue(currentState); return jvsrCloudDb.collection('sharedTracker').doc('main').set({state:safeState,updatedBy:jvsrCloudUser.uid,updatedAt:firebase.firestore.FieldValue.serverTimestamp()}).then(()=>true).catch(e=>{console.error('JVSR cloud save failed',e);jvsrAuthMessage('Cloud save failed: '+(e&&e.message?e.message:'unknown error'),true);return false;}); }
+window.jvsrCloudSave=jvsrCloudSave;
+window.jvsrIsBoss=()=>!!(jvsrCloudUser&&jvsrCloudUser.uid==='UglMOqq2UJWO8kdqMG3jHkTMFtE3');
+function jvsrStartCloud(){
+  firebase.initializeApp(firebaseConfig); jvsrCloudDb=firebase.firestore();
+  firebase.auth().onAuthStateChanged(async user=>{
+    if(jvsrCloudUnsub){jvsrCloudUnsub();jvsrCloudUnsub=null;}
+    if(!user){jvsrCloudUser=null;jvsrShowApp(false);return;}
+    if(!JVSR_ALLOWED_UIDS.includes(user.uid)){await firebase.auth().signOut();jvsrAuthMessage('This account is not authorized for JVSR RICE RETAIL.',true);jvsrShowApp(false);return;}
+    jvsrCloudUser=user;jvsrAuthMessage('Signed in. Connecting to shared tracker…');
+    try{
+      const ref=jvsrCloudDb.collection('sharedTracker').doc('main');
+      const snap=await ref.get();
+      if(snap.exists && snap.data().state && typeof window.jvsrApplyCloudState==='function') window.jvsrApplyCloudState(snap.data().state);
+      else if(!snap.exists && typeof window.jvsrGetState==='function') await jvsrCloudSave(window.jvsrGetState());
+      jvsrCloudUnsub=ref.onSnapshot(s=>{if(!s.exists)return;const d=s.data();if(d.updatedBy && d.updatedBy!==jvsrCloudUser?.uid && d.state && typeof window.jvsrApplyCloudState==='function')window.jvsrApplyCloudState(d.state);},e=>{console.error(e);jvsrAuthMessage('Cannot read shared data. Check Firestore Rules.',true);});
+      jvsrAuthMessage('Connected. Shared data sync is active.');jvsrShowApp(true);
+    }catch(e){console.error(e);jvsrAuthMessage('Could not connect to Firestore. Keep Rules locked until the provided rules are published.',true);jvsrShowApp(false);}
+  });
+}
+
+window.addEventListener('load',()=>{try{jvsrStartCloud();}catch(e){console.error(e);jvsrAuthMessage('Firebase could not start. Check internet connection.',true);}});
+</script>
+</head>
+<body>
+<div id="jvsrAuthGate" style="position:fixed;inset:0;z-index:99999;background:#f3f6fb;display:flex;align-items:center;justify-content:center;padding:20px;">
+ <div style="width:100%;max-width:420px;background:white;border-radius:18px;padding:24px;box-shadow:0 8px 26px rgba(24,45,75,.12);">
+  <h2 style="font-size:21px;margin:0 0 8px;color:#142d4e">JVSR RICE RETAIL</h2><p style="font-size:14px;color:#64748b">Sign in to access the shared business tracker.</p>
+  <label style="display:block;font-size:13px;font-weight:700">Email<input id="jvsrEmail" type="email" autocomplete="username" placeholder="Your Firebase account email" style="display:block;width:100%;padding:12px;margin:6px 0 12px;border:1px solid #dce3ee;border-radius:10px"></label>
+  <label style="display:block;font-size:13px;font-weight:700">Password<input id="jvsrPassword" type="password" autocomplete="current-password" placeholder="Password" style="display:block;width:100%;padding:12px;margin:6px 0 12px;border:1px solid #dce3ee;border-radius:10px"></label>
+  <button id="jvsrLoginBtn" onclick="jvsrLogin()" style="width:100%;padding:12px;border:0;border-radius:10px;background:#16a36a;color:white;font-weight:750">Sign in</button>
+  <button type="button" onclick="jvsrForgotPassword()" style="width:100%;padding:9px;border:0;background:transparent;color:#2563eb;text-decoration:underline;box-shadow:none">Forgot password?</button>
+  <p id="jvsrAuthMessage" style="font-size:13px;line-height:1.45;color:#334155">Checking Firebase connection…</p>
+  <p style="font-size:12px;color:#64748b">Only the two approved Firebase accounts can access shared data. Never share your password.</p>
+ </div>
+</div>
+
+<div id="jvsrSessionBar" style="display:none;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;margin:0 -14px 10px;background:#e8f5ee;border-bottom:1px solid #b7e5ce;font-size:12px"><span id="jvsrSessionText">Shared sync active</span><button type="button" onclick="jvsrLogout()" style="width:auto;margin:0;padding:7px 12px;background:#dc4c4c;color:white;border:0;border-radius:9px;font-size:12px">Sign Out</button></div>
+<div class="header"><button aria-label="Open navigation menu" class="menu-toggle" id="menuToggle" type="button">☰</button><div class="store-name">JVSR RICE RETAIL</div><div class="store-sub">Business Overview &amp; Daily Tracker</div></div>
+<div class="date" id="dateNow"></div>
+<div class="drawer-scrim" id="drawerScrim"></div><aside aria-label="Main navigation" class="drawer" id="appDrawer"><div class="drawer-brand">JVSR RICE RETAIL<small>BUSINESS TRACKER</small></div><button class="tab active" data-tab="dash" type="button"><span>▦</span> Summary</button><button class="tab" data-tab="products" type="button"><span>▣</span> Products</button><button class="tab" data-tab="gcash" type="button"><span>◉</span> GCash</button><button class="tab" data-tab="load" type="button"><span>▰</span> Load</button><button class="tab" data-tab="credit" type="button"><span>▤</span> Credit</button><button class="tab" data-tab="inventory" type="button"><span>▦</span> Inventory</button><button class="tab" data-tab="settings" type="button"><span>⚙</span> Prices</button><button class="tab" data-tab="month" type="button"><span>▣</span> Daily Record</button><button class="tab" data-tab="admin" type="button"><span>♙</span> Admin</button></aside>
+<section class="page" id="dash">
+<details class="summary-details"><summary>💵 Cash Float — Opening Register Cash</summary><div class="summary-details-body"><div class="card cash-float-card"><p class="small">Enter the physical cash in your register when you open the store. Your expected register balance updates as you record cash movements.</p><input id="cashFloatInput" min="0" placeholder="Opening cash float (₱)" step="0.01" type="number"/><button class="blue" id="saveCashFloat">Save Opening Float</button><p class="small">Saved opening float: <strong id="cashFloatSaved">₱0.00</strong></p></div></div></details><div class="card"><h2>📈 Today's Overview — <span id="monthLabel"></span></h2><div class="grid">
+<div class="metric sales"><div>Total Sales</div><div id="sales">₱0.00</div></div>
+<div class="metric cashin"><div>📤 GCash / Load Cash In (Sent)</div><div id="cashInView">₱0.00</div></div><div class="metric cashout"><div>💰 GCash Cash Out (Received)</div><div id="cashOutView">₱0.00</div></div>
+<div class="metric gcash"><div>💜 GCash In Fee</div><div id="gcashInFeesView">₱0.00</div></div><div class="metric gcash"><div>💜 GCash Out Fee</div><div id="gcashOutFeesView">₱0.00</div></div><div class="metric load"><div>📱 Load Income</div><div id="loadIncome">₱0.00</div></div>
+<div class="metric credit"><div>📋 Credit Owed</div><div id="creditOwed">₱0.00</div></div><div class="metric credit"><div>💜 GCash Credit Owed</div><div id="gcashCreditOwed">₱0.00</div></div>
+<div class="metric" style="background:#e0f2f1;color:#00695c;grid-column:span 2"><div>🏦 Cash Register Balance</div><div id="registerBalance">₱0.00</div></div>
+</div></div>
+<details class="summary-details"><summary>🧾 Today’s Transaction History</summary><div class="summary-details-body"><div class="table-wrap"><table><thead><tr><th>Time</th><th>Description</th><th>Amount</th></tr></thead><tbody data-edit-only="true" id="transactions"></tbody></table></div></div></details>
+<details class="summary-details"><summary>💵 Cash Movements &amp; Adjustments</summary><div class="summary-details-body"><div class="card"><h2>💰 Other Income</h2><input id="cashInAmount" min=".01" placeholder="Amount received (₱)" step=".01" type="number"/><input id="cashInNote" placeholder="Source / description"/><button class="blue" id="addCashIn">Record Other Income</button></div><div class="card"><h2>📤 Expenses</h2><input id="cashOutAmount" min=".01" placeholder="Amount paid (₱)" step=".01" type="number"/><input id="cashOutNote" placeholder="Purpose / description"/><button class="orange" id="addCashOut">Record Expense</button></div><div class="card"><h2>🤝 Cash Borrowed</h2><p class="small">Record cash taken from the cash register. This is a cash outflow, so it reduces the Cash Register Balance, but does not change Total Sales or Estimated Profit.</p><input id="borrowAmount" min=".01" placeholder="Amount borrowed (₱)" step=".01" type="number"/><input id="borrowNote" placeholder="Note (optional)"/><button class="orange" id="addBorrow">Record Cash Borrowed</button></div><div class="card"><h2>🔄 GCash Personal Transaction</h2><p class="small">No service fee. Cash In means you send GCash and receive cash into the register. Cash Out means you receive GCash and give cash from the register. This updates both balances without adding business sales or profit.</p><label>Transaction Type<select id="personalTxType"><option value="cash-in">Cash In — send GCash, receive cash</option><option value="cash-out">Cash Out — receive GCash, give cash</option></select></label><label>Amount (₱)<input id="personalTxAmount" min=".01" placeholder="Enter amount" step=".01" type="number"/></label><label>Person’s Name<input id="personalTxPerson" maxlength="100" placeholder="Who is this transaction with?" autocomplete="name"/></label><button class="blue" id="savePersonalTx" type="button">Record GCash Personal Transaction</button><p id="personalTxStatus" class="small" role="status" aria-live="polite"></p></div></div></details><details class="summary-details"><summary>🧮 Closing Cash Count</summary><div class="summary-details-body"><div class="card cash-check"><p class="small">Enter the physical cash you counted. The tracker compares it with the expected cash-register balance; this does not change Total Sales or any transaction.</p><label>Actual Cash Counted (₱)<input id="actualCashCountedInput" type="number" min="0" step="0.01" placeholder="Enter cash counted at closing"/></label><button class="blue" id="saveCashCountBtn" type="button">Save Cash Count</button><div id="cashCountResult" class="cash-check-result" role="status" aria-live="polite">Enter your actual cash count to check the difference.</div></div></div></details><details class="summary-details"><summary>📝 Closing Notes for Admin</summary><div class="summary-details-body"><div class="card"><p class="small">Explain unusual transactions, corrections, or anything the Admin should know. Notes are saved with the shared tracker and attached to the date’s Daily Record. Notes never change totals.</p><textarea id="closingNotesInput" class="closing-note" placeholder="Example: Customer repaid an old balance; cash change was given from the register..."></textarea><button class="blue" id="saveClosingNotesBtn" type="button">Save Closing Notes</button><p id="closingNotesStatus" class="small" role="status" aria-live="polite"></p></div></div></details><div class="card bottom-actions"><button class="orange" id="clearBtn" type="button">🔄 Clear Today’s Transactions</button><p class="small">When you clear today’s transactions, you’ll be asked to save today’s record to Daily Record before clearing. Previous records are kept.</p><p id="clearStatus" class="small" role="status" aria-live="polite"></p></div>
+</section>
+
+
+
+
+<section class="page hidden" id="products"><div class="card"><h2>🛍️ Products</h2><p class="small">Record sales for all products here. Choose the product, quantity, and payment method.</p></div><div class="product-grid"><div class="card"><h2>🍚 Sell Rice</h2><select id="riceType"></select><select id="riceUnit"><option value="kg">By kilogram</option><option value="bag">By bag</option></select><input id="riceQty" min="0.1" placeholder="Quantity" step="0.1" type="number"/><div class="small" id="ricePrice"></div><select id="ricePay"><option>Cash</option><option>GCash</option><option>Credit</option><option>Credit Card</option><option>Bank Transfer</option><option>Other</option><option>Split Payment</option></select><input id="riceCustomer" placeholder="Customer name (required for credit)"/><button id="sellRice">✅ Record Rice Sale</button></div><div class="card"><h2>🥚 Sell Eggs</h2><select id="eggSize"><option value="S">Small</option><option value="M">Medium</option><option value="L">Large</option><option value="XL">Extra Large</option></select><select id="eggUnit"><option value="piece">Per Piece</option><option value="tray">Per Tray (30 eggs)</option></select><input id="eggQty" min="1" placeholder="Quantity" step="1" type="number"/><div class="small" id="eggPrice"></div><select id="eggPay"><option>Cash</option><option>GCash</option><option>Credit</option><option>Credit Card</option><option>Bank Transfer</option><option>Other</option><option>Split Payment</option></select><input id="eggCustomer" placeholder="Customer name (required for credit)"/><button id="sellEggs">✅ Record Egg Sale</button></div><div class="card"><h2>🛢️ Sell Cooking Oil</h2><select id="oilSize"><option value="350ml">350ml bottle</option><option value="1L">1 liter bottle</option><option value="1.5L">1.5 liter bottle</option></select><input id="oilQty" min="1" placeholder="Number of bottles" step="1" type="number"/><div class="small" id="oilPrice"></div><select id="oilPay"><option>Cash</option><option>GCash</option><option>Credit</option><option>Credit Card</option><option>Bank Transfer</option><option>Other</option><option>Split Payment</option></select><input id="oilCustomer" placeholder="Customer name (required for credit)"/><button id="sellOil">✅ Record Oil Sale</button></div><div class="card"><h2>🧼 Sell Dishwashing Liquid</h2><select id="soapSize"><option value="250ml">250ml bottle</option><option value="500ml">500ml bottle</option><option value="1L">1 liter bottle</option></select><input id="soapQty" min="1" placeholder="Number of bottles" step="1" type="number"/><div class="small" id="soapPrice"></div><select id="soapPay"><option>Cash</option><option>GCash</option><option>Credit</option><option>Credit Card</option><option>Bank Transfer</option><option>Other</option><option>Split Payment</option></select><input id="soapCustomer" placeholder="Customer name (required for credit)"/><button id="sellSoap">✅ Record Soap Sale</button></div><div class="card"><h2>🌸 Sell Fabric Softener</h2><label>Scent<input id="softenerScent" placeholder="e.g. Fresh, Lavender, Floral"/></label><select id="softenerSize"><option value="250ml">250ml bottle</option><option value="500ml">500ml bottle</option><option value="1L">1 liter bottle</option></select><input id="softenerQty" min="1" placeholder="Number of bottles" step="1" type="number"/><div class="small" id="softenerPrice"></div><select id="softenerPay"><option>Cash</option><option>GCash</option><option>Credit</option><option>Credit Card</option><option>Bank Transfer</option><option>Other</option><option>Split Payment</option></select><input id="softenerCustomer" placeholder="Customer name (required for credit)"/><button id="sellSoftener">✅ Record Fabric Softener Sale</button></div><div class="card"><h2>🧴 Sell Liquid Soap</h2><label>Scent<input id="liquidSoapScent" placeholder="e.g. Lemon, Rose, Strawberry"/></label><select id="liquidSoapSize"><option value="250ml">250ml bottle</option><option value="500ml">500ml bottle</option><option value="1L">1 liter bottle</option></select><input id="liquidSoapQty" min="1" placeholder="Number of bottles" step="1" type="number"/><div class="small" id="liquidSoapPrice"></div><select id="liquidSoapPay"><option>Cash</option><option>GCash</option><option>Credit</option><option>Credit Card</option><option>Bank Transfer</option><option>Other</option><option>Split Payment</option></select><input id="liquidSoapCustomer" placeholder="Customer name (required for credit)"/><button id="sellLiquidSoap">✅ Record Liquid Soap Sale</button></div><div class="card"><h2>🛍️ Sell an Admin-Added Product</h2><p class="small">Products added in Admin can be sold here and will automatically reduce their inventory stock.</p><select id="customSaleProduct"></select><input id="customSaleQty" min="0.01" placeholder="Quantity sold" step="0.01" type="number"/><select id="customSalePay"><option>Cash</option><option>GCash</option><option>Credit</option><option>Credit Card</option><option>Bank Transfer</option><option>Other</option><option>Split Payment</option></select><input id="customSaleCustomer" placeholder="Customer name (required for credit)"/><div class="small" id="customSalePrice"></div><button id="customSaleSave">Record Product Sale</button></div></div></section><section class="page hidden" id="load"><div class="card"><h2>📱 Record Load Sale</h2><div class="note">Enter the amount of load sent and the commission you earned. Only the commission counts as income.</div><input id="loadAmount" min="1" placeholder="Load amount sent (₱)" type="number"/><input id="loadCommission" min="0" placeholder="Commission earned (₱)" step=".01" type="number"/><input id="loadNote" placeholder="Network / reference (avoid storing private PINs)"/><button id="saveLoad">✅ Save Load Transaction</button></div><div class="card"><h2>Load Totals</h2><p>Total load sent: <strong id="loadSent">₱0.00</strong></p><p>Total commission: <strong id="loadCommissionTotal">₱0.00</strong></p></div></section>
+<section class="page hidden" id="gcash"><div class="card"><h2>💜 GCash Cash In — You Send Money to Customer</h2><p class="small">Enter the amount the customer wants to receive. The service fee is added automatically and paid separately in cash.</p><input id="gin" min="1" placeholder="Amount customer receives (₱)" step="0.01" type="number"/><div class="result" id="ginResult">Service fee: ₱0.00 · Customer pays total: ₱0.00</div><button id="saveGIn">Record Cash In</button></div><div class="card"><h2>💙 GCash Cash Out — You Receive GCash from Customer</h2><p class="small">Enter the exact amount the customer sends to your GCash. Choose whether the fee is paid separately in cash, deducted from the amount, or added on top of the amount sent to your GCash.</p><input id="gout" min="1" placeholder="Exact amount customer sends to GCash (₱)" step="0.01" type="number"/><select id="goutFeeMode"><option value="cash">Customer pays the fee separately in cash</option><option value="deduct">Fee is deducted from the amount sent</option><option value="added">Fee added by the customer to the GCash amount</option></select><div class="result" id="goutResult">Service fee: ₱0.00 · Cash you give customer: ₱0.00</div><button id="saveGOut">Record Cash Out</button><p class="small">Fee schedule: ₱5 for every ₱500 or part thereof (₱1–₱500 = ₱5, ₱501–₱1,000 = ₱10, and so on).</p></div><div class="card"><h2>📅 Monthly GCash Balance</h2><p class="small">Daily closing is calculated automatically from your opening balance and GCash transactions. The closing balance is read-only and carries forward as the next day’s opening balance. Use Edit Opening Balance only when you need to correct the starting amount.</p><p><strong id="gcashMonthLabel"></strong></p><div class="row"><div><div class="small">Opening balance</div><strong id="gcashOpeningView">₱0.00</strong></div><button class="blue" id="editGcashOpeningBtn" style="width:auto">Edit Opening</button></div><div class="hidden" id="gcashOpeningEditor"><input id="gcashOpeningInput" min="0" placeholder="Opening GCash balance (₱)" step="0.01" type="number"/><button class="blue" id="saveGcashOpening">Save Opening Balance</button></div><div class="grid" style="margin-top:12px"><div class="metric gcash"><div>Today Opening Balance</div><div id="gcashOpeningViewCard">₱0.00</div></div><div class="metric cashin"><div>Today Closing Balance (automatic)</div><div id="gcashClosingView">₱0.00</div></div></div><p class="small" id="gcashChangeView">Net change this month: ₱0.00</p></div></section>
+<section class="page hidden" id="credit"><div class="card"><h2>📋 Add Customer Credit</h2><input id="creditName" placeholder="Customer name"/><input id="creditAmount" min=".01" placeholder="Amount owed (₱)" step=".01" type="number"/><input id="creditNote" placeholder="Item / description"/><button id="addCredit">Add to Credit List</button></div><div class="card"><h2>💵 Receive Credit Payment</h2><p class="small">Choose the payment method first, then enter the principal being repaid. For GCash payments, enter the full amount received through GCash; any extra amount is returned from the physical cash register as change. GCash opening/closing balances include the full amount actually received through GCash.</p><select id="creditSelect"></select><label>Payment Method<select id="creditMethod"><option>Cash</option><option>GCash</option><option>Credit Card</option><option>Bank Transfer</option><option>Other</option><option>Split Payment</option></select></label><label>Principal / Credit Amount Being Paid (₱)<input id="creditPayment" min=".01" placeholder="Enter principal being repaid" step=".01" type="number"/></label><div id="creditGcashReceivedWrap" class="hidden"><label>Amount received through GCash (₱)<input id="creditGcashReceived" type="number" min="0" step="0.01" placeholder="Enter full amount customer sent via GCash"/><span class="small">Enter the full amount received, even if it is more than the credit payment. The tracker calculates any change to give from the cash register below.</span></label><div class="result" id="creditChangePreview">Change to give from cash register: ₱0.00</div></div><div id="creditGcashFeeOptions" class="hidden"><label>GCash credit service fee handling<select id="creditGcashFeeMode"><option value="included">Customer sends credit amount + fee through GCash</option><option value="cash">Customer sends credit amount through GCash and pays fee separately in cash</option></select></label><div class="result" id="creditGcashFeePreview">Service fee: ₱0.00</div></div><button class="blue" id="payCredit">Record Payment</button></div><div class="card"><h2>💜 GCash Credit Service</h2><p class="small">Record a GCash cash-in or cash-out service handled through the Credit tab. The same fee schedule applies: ₱5 for every ₱500 or part thereof. Choose how the cash-out fee is handled.</p><select id="gcashCreditType"><option value="in">GCash Cash In</option><option value="out">GCash Cash Out</option></select><input id="gcashCreditAmount" min="1" placeholder="Transaction amount (₱)" step=".01" type="number"/><select id="gcashCreditFeeMode"><option value="cash">Fee paid separately in cash</option><option value="deduct">Fee deducted from amount</option><option value="added">Fee added on top</option></select><div class="result" id="gcashCreditPreview">Service fee: ₱0.00</div><button class="blue" id="saveGcashCredit">Record GCash Credit Service</button></div><div class="card"><h2>Outstanding Credits</h2><div id="creditList"></div></div></section>
+
+<section class="page hidden" id="month"><div class="card"><h2>📅 Daily Records</h2><p class="small">Each day is saved here automatically when you click “Clear Today’s Transactions.” The saved record includes that day’s transactions and closing cash/GCash balances.</p></div><div class="card"><div id="history"></div></div></section>
+<section class="page hidden" id="inventory"><div class="card"><h2>📦 Inventory Tracker</h2><p class="small">Enter beginning stock, record new stock purchases, and update the physical count during your weekly stocktake. Sales recorded in this tracker reduce the matching stock automatically. Existing sales from before inventory tracking are not deducted retroactively.</p><div class="table-wrap"><table><thead><tr><th>Product / Size</th><th>Unit</th><th>Beginning stock</th><th>Added</th><th>Sold</th><th>Expected left</th><th>Weekly physical count</th><th>Actions</th></tr></thead><tbody id="inventoryRows"></tbody></table></div></div><div class="card hidden" id="inventoryAdminTools"><h2>➕ Add Stock / Record Weekly Count (Admin)</h2><label>Product<select id="invProduct"></select></label><div class="row"><label>Rice quantity unit (rice only)<select id="invQtyUnit"><option value="bag">Bags (1 bag = 25 kg)</option><option value="kg">Kilograms (kg)</option></select></label><label>Beginning stock<input id="invBeginningQty" min="0" placeholder="Enter beginning stock" step="0.01" type="number"/></label></div><div class="row"><label>Quantity purchased / added<input id="invAddQty" min="0" placeholder="Stock added / repurchased" step="0.01" type="number"/></label><label>Physical count (weekly)<input id="invCountQty" min="0" placeholder="Actual stock counted" step="0.01" type="number"/></label></div><button class="blue" id="invSaveBeginning">Save Beginning Stock</button><button class="blue" id="invSaveAdd">Record Stock Added</button><button class="orange" id="invSaveCount">Save Weekly Physical Count</button><p class="small">Only an unlocked Admin can edit beginning stock or record repurchases. Rice bags and kilograms share one stock balance: 1 bag = 25 kg. Weekly physical count resets the item's baseline so earlier sales are not deducted twice.</p></div></section>
+<section class="page hidden" id="admin"><div class="card"><h2>🔐 Admin Access</h2><p class="small">Only the approved Boss account can open Admin tools in this test version. Set a local admin password on the Boss device. This screen-level restriction is for testing; server-side role enforcement must be strengthened before real business use.</p><div class="hidden" id="adminSetup"><label>Create admin password<input autocomplete="new-password" id="adminNewPass" placeholder="At least 4 characters" type="password"/></label><label>Confirm admin password<input autocomplete="new-password" id="adminConfirmPass" placeholder="Enter it again" type="password"/></label><button id="adminSetPass">Set Admin Password</button></div><div id="adminLogin"><label>Admin password<input autocomplete="current-password" id="adminPassInput" placeholder="Enter admin password" type="password"/></label><button class="blue" id="adminLoginBtn">Unlock Admin</button></div><div class="hidden" id="adminUnlocked"><p>🔓 Admin unlocked on this page.</p><button class="orange" id="adminLockBtn">Lock Admin</button></div></div><div class="hidden" id="adminTools"><div class="card"><h2>📝 Today’s Closing Notes</h2><p class="small" id="adminClosingNotesView">No closing notes saved for today.</p></div><div id="adminProductRows" class="hidden"></div><div class="card"><h2>📊 Estimated Profit</h2><p class="small">Available in Admin rather than on the Summary page.</p><div class="metric profit"><div>Estimated Profit</div><div id="profit">₱0.00</div></div></div><div class="card"><h2>➕ Add a Product</h2><p class="small">Add products or variants without changing the HTML. They will appear in Inventory and in the product-sale form.</p><label>Product name<input id="adminProductName" placeholder="e.g. Shampoo"/></label><div class="row"><label>Size / variant<input id="adminProductVariant" placeholder="e.g. 100ml"/></label><label>Stock unit<input id="adminProductUnit" placeholder="e.g. bottle, piece, pack"/></label></div><div class="row"><label>Cost per unit (₱)<input id="adminProductCost" min="0" placeholder="0" step="0.01" type="number"/></label><label>Selling price (₱)<input id="adminProductPrice" min="0" placeholder="0" step="0.01" type="number"/></label></div><button id="adminAddProduct">Add Product</button></div><div class="card" id="adminCorrectionCard"><h2>🛠️ Admin Override</h2><p class="small">Choose a today or archived transaction and correct its description/item, type, payment method, amount, and profit. The displayed transaction history, Overview, and archived daily closing balances will be updated where applicable.</p><label>Transaction<select id="adminTxSelect"></select></label><label>Correct item / transaction description<input id="adminTxDesc" type="text" placeholder="Enter the correct item or transaction description"></label><div class="row"><label>Correct transaction type<select id="adminTxCategory"><option value="sale">Product sale / cash received</option><option value="manual-cash-in">Other Income (Cash In)</option><option value="manual-cash-out">Expense / Cash Out</option><option value="cash-borrowed">Cash Borrowed</option><option value="gcash-in">GCash Cash In</option><option value="gcash-out">GCash Cash Out</option><option value="credit-payment">Credit Payment</option><option value="load-sale">Load Sale</option></select></label><label>Payment method<select id="adminTxMethod"><option>Cash</option><option>GCash</option><option>Credit</option><option>Credit Card</option><option>Bank Transfer</option><option>Other</option><option>Split Payment</option></select></label></div><div class="row"><label>Correct amount (₱)<input id="adminTxAmount" type="number" step="0.01" min="0"></label><label>Correct profit (₱)<input id="adminTxProfit" type="number" step="0.01"></label></div><div class="row"><label>Cash portion (split only)<input id="adminTxCash" type="number" step="0.01" min="0"></label><label>GCash portion (split only)<input id="adminTxGcash" type="number" step="0.01" min="0"></label></div><button class="blue" id="adminTxLoad">Load selected details</button><button type="button" id="adminTxSave" onclick="if(typeof window.jvsrAdminSaveClick==='function'){window.jvsrAdminSaveClick(event)}else{alert('Admin Override did not initialize. Please reload the page and try again.')}">Save Correction</button><div id="adminCorrectionHistory" class="small"></div></div><div class="card"><h2>🧹 Start Fresh for Launch</h2><p class="small">This permanently clears test transactions, credit balances, daily history, cash float, GCash opening balances, load totals, and inventory counts from the shared tracker when cloud sync succeeds. Product catalog, prices, scent names, and admin password are kept. You will enter opening balances and beginning stock again.</p><button class="red" id="launchResetBtn" type="button" onclick="if(typeof window.jvsrResetRecordsForLaunch==='function'){window.jvsrResetRecordsForLaunch()}else{alert('Reset function did not initialize. Please reload this test page.')}">Reset Records for Launch</button></div></div></section>
+<section class="page hidden" id="settings"><div class="card"><h2>🍚 Rice Selling Prices</h2><p class="small">Edit rice names and selling prices per kilogram and per bag. Cost prices are hidden because this tracker is focused on daily transactions and cash flow.</p><div id="riceSettings"></div><button class="blue" id="saveRicePrices">Save Rice Prices</button></div><div class="card"><h2>🥚 Egg prices</h2><div class="row"><label>Small<input id="pEggS" min="0" step=".5" type="number"/></label><label>Medium<input id="pEggM" min="0" step=".5" type="number"/></label><label>Large<input id="pEggL" min="0" step=".5" type="number"/></label><label>XL / piece<input id="pEggXL" min="0" step=".5" type="number"/></label></div><p class="small">Tray prices are separate for each egg size (1 tray = 30 eggs).</p><div class="row"><label>Small / tray<input id="pEggTrayS" min="0" step=".5" type="number"/></label><label>Medium / tray<input id="pEggTrayM" min="0" step=".5" type="number"/></label></div><div class="row"><label>Large / tray<input id="pEggTrayL" min="0" step=".5" type="number"/></label><label>XL / tray<input id="pEggTrayXL" min="0" step=".5" type="number"/></label></div><button class="blue" id="saveEggPrices">Save Egg Prices</button></div><div class="card"><h2>🛢️ Oil selling prices</h2><div class="row"><label>350ml<input id="pOil350" min="0" type="number"/></label><label>1L<input id="pOil1" min="0" type="number"/></label><label>1.5L<input id="pOil15" min="0" type="number"/></label></div><button class="blue" id="saveOilPrices">Save Oil Prices</button></div><div class="card"><h2>🧼 Dishwashing liquid prices</h2><div class="row"><label>250ml<input id="pSoap250" min="0" type="number"/></label><label>500ml<input id="pSoap500" min="0" type="number"/></label><label>1L<input id="pSoap1" min="0" type="number"/></label></div><button class="blue" id="saveSoapPrices">Save Soap Prices</button></div><div class="card"><h2>🌸 Fabric softener prices</h2><div class="row"><label>250ml<input id="pSoft250" min="0" type="number"/></label><label>500ml<input id="pSoft500" min="0" type="number"/></label><label>1L<input id="pSoft1" min="0" type="number"/></label></div><button class="blue" id="saveSoftPrices">Save Fabric Softener Prices</button></div><div class="card"><h2>🧴 Liquid soap prices</h2><div class="row"><label>250ml<input id="pLiquid250" min="0" type="number"/></label><label>500ml<input id="pLiquid500" min="0" type="number"/></label><label>1L<input id="pLiquid1" min="0" type="number"/></label></div><button class="blue" id="saveLiquidPrices">Save Liquid Soap Prices</button></div></section>
+<script>
+const $=id=>document.getElementById(id), peso=n=>'₱'+(Number(n)||0).toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
+const defaults={rice:Array.from({length:10},(_,i)=>({name:'Rice '+(i+1),costKg:50,priceKg:65,costBag:2500,priceBag:3250})),eggs:{S:7,M:8,L:9.5,XL:11},oil:{'350ml':45,'1L':110,'1.5L':160},soap:{'250ml':25,'500ml':45,'1L':85},fabricSoftener:{'250ml':25,'500ml':45,'1L':85},liquidSoap:{'250ml':25,'500ml':45,'1L':85}};
+function read(key,def){try{const v=localStorage.getItem('jvsr_final_clean_'+key);return v===null?structuredClone(def):JSON.parse(v)}catch(e){return structuredClone(def)}}
+let state=read('state',{transactions:[],credits:[],history:[],cashIn:0,cashOut:0,cashFloat:0,cashFloatDay:'',loadSent:0,loadCommission:0,gcashFees:0,gcashOpeningBalances:{},prices:defaults});
+state.prices=state.prices||structuredClone(defaults);state.prices.eggs=state.prices.eggs||structuredClone(defaults.eggs);state.prices.fabricSoftener=state.prices.fabricSoftener||structuredClone(defaults.fabricSoftener);state.prices.liquidSoap=state.prices.liquidSoap||structuredClone(defaults.liquidSoap);state.prices.eggsTray=state.prices.eggsTray||{S:(Number(state.prices.eggs.S)||7)*30,M:(Number(state.prices.eggs.M)||8)*30,L:(Number(state.prices.eggs.L)||9.5)*30,XL:(Number(state.prices.eggs.XL)||11)*30};state.cashFloat=Number(state.cashFloat)||0; state.cashFloatDay=state.cashFloatDay||dayKey(); state.gcashOpeningBalances=state.gcashOpeningBalances||{}; state.gcashDailyOpening=state.gcashDailyOpening||{}; state.inventory=state.inventory||{}; state.customProducts=Array.isArray(state.customProducts)?state.customProducts:[]; state.inventoryNames=state.inventoryNames||{};state.correctionLog=Array.isArray(state.correctionLog)?state.correctionLog:[];state.dailyClosings=state.dailyClosings&&typeof state.dailyClosings==='object'?state.dailyClosings:{};
+// Install critical button actions early so later UI initialization cannot leave them undefined.
+window.jvsrAdminSaveClick=async function(event){try{if(event)event.preventDefault();if(!(window.jvsrIsBoss&&window.jvsrIsBoss()))return alert('Only the boss account can correct transactions.');const selectedValue=$('adminTxSelect').value;const selected=getAdminSelectedTx();if(!selected)return alert('Select a transaction first.');let t=selected.t;if(!selected.archived){const liveIndex=state.transactions.findIndex(x=>String(x.id)===String(t.id));if(liveIndex<0)return alert('This active transaction is no longer in the shared list. Reload the transaction selector and try again.');t=state.transactions[liveIndex];}let old={description:t.desc,category:t.category,method:t.method,amount:t.amount,profit:t.profit,cash:t.cash,splitCash:t.splitCash,splitGcash:t.splitGcash,gcashDelta:t.gcashDelta};let correctedDesc=$('adminTxDesc').value.trim(),cat=$('adminTxCategory').value,method=$('adminTxMethod').value,amount=Number($('adminTxAmount').value),profit=Number($('adminTxProfit').value),cash=Number($('adminTxCash').value||0),gcash=Number($('adminTxGcash').value||0);if(!Number.isFinite(amount)||amount<0||!Number.isFinite(profit)||!Number.isFinite(cash)||!Number.isFinite(gcash)||cash<0||gcash<0)return alert('Enter valid correction amounts.');if(method==='Split Payment'&&Math.abs(cash+gcash-amount)>.01)return alert('For Split Payment, Cash + GCash must equal the corrected amount.');if(!confirm('Save this correction to '+(selected.archived?'the archived Daily Record':'today’s active transactions')+' and update the displayed record?'))return;t.desc=correctedDesc||t.desc||'Transaction';t.category=cat;t.method=method;t.amount=['manual-cash-out','cash-borrowed','gcash-out'].includes(cat)?-Math.abs(amount):Math.abs(amount);t.profit=profit;t.cash=['manual-cash-out','cash-borrowed','gcash-out'].includes(cat)?-Math.abs(method==='Split Payment'?cash:amount):Math.abs(method==='Split Payment'?cash:(cat==='manual-cash-in'?amount:(method==='Cash'?amount:0)));if(method==='Split Payment'){t.splitCash=cash;t.splitGcash=gcash;t.gcashDelta=gcash;}else{delete t.splitCash;delete t.splitGcash;if(cat==='sale'&&method==='GCash')t.gcashDelta=amount;else if(cat==='sale'&&method!=='GCash')delete t.gcashDelta;}state.correctionLog=state.correctionLog||[];state.correctionLog.push(jvsrCleanFirestoreValue({when:new Date().toLocaleString('en-PH'),by:jvsrCloudUser?.email||'Boss',description:t.desc||'Transaction',before:old,after:{category:t.category,method:t.method,amount:t.amount,profit:t.profit,cash:t.cash,splitCash:t.splitCash,splitGcash:t.splitGcash,gcashDelta:t.gcashDelta}}));if(selected.archived){recalculateArchivedRecord(selected.record);}persist();fillAdminTxSelect();$('adminTxSelect').value=selectedValue;loadAdminTx();if(window.jvsrCloudSave){const cloudOk=await window.jvsrCloudSave(state);if(!cloudOk){alert('Correction was applied on this device, but cloud saving was not confirmed. Please check the connection and Firebase before relying on the other account.');return;}}alert('Correction saved. Description and amount were updated in the transaction record. '+(selected.archived?'The archived Daily Record transaction and its closing balances were updated. ':'The active transaction list and Overview were refreshed. ')+(window.jvsrCloudSave?'Cloud save confirmed.': ''));}catch(err){console.error('Admin correction save failed',err);alert('Admin correction could not be saved: '+(err&&err.message?err.message:'unexpected error'));}};
+function dailyCashRegisterBalance(day=dayKey()){let ts=state.transactions.filter(t=>t.day===day);let cashIn=ts.reduce((sum,t)=>{if(t.category==='sale'&&t.method==='Cash')return sum+Math.abs(Number(t.amount)||0);if(t.category==='sale'&&t.method==='Split Payment')return sum+Math.abs(Number(t.splitCash??t.cash)||0);if(t.category==='manual-cash-in'||t.category==='personal-cash-in'||t.category==='personal-gcash-out')return sum+Math.abs(Number(t.cash)||0);if(t.category==='gcash-in')return sum+Math.abs(Number(t.cash)||0);if(t.category==='credit-payment'&&t.method==='Cash')return sum+Math.abs(Number(t.amount)||0);if(t.category==='credit-payment'&&t.method==='Split Payment')return sum+Math.abs(Number(t.splitCash??t.cash)||0);if(t.category==='credit-payment'&&t.method==='GCash')return sum+Math.abs(Number(t.cash)||0);if(t.category==='credit-payment'&&t.method==='Split Payment')return sum+Math.abs(Number(t.splitCash??t.cash)||0);if(t.category==='load-sale')return sum+Math.abs(Number(t.amount)||0)+Math.abs(Number(t.profit)||0);return sum},0);let cashOut=ts.reduce((sum,t)=>['manual-cash-out','personal-cash-out','personal-gcash-in','gcash-out','cash-borrowed'].includes(t.category)?sum+Math.abs(Number(t.cash)||0):sum+(t.category==='credit-payment'?Math.abs(Number(t.cashChangeOut)||0):0),0);return (state.cashFloatDay===day?Number(state.cashFloat)||0:0)+cashIn-cashOut}
+function showClearStatus(message,isError=false){const el=$('clearStatus');if(el){el.textContent=message;el.style.color=isError?'#b91c1c':'#167449';}}
+async function runClearToday(){
+  const btn=$('clearBtn');
+  if(btn.dataset.busy==='1') return;
+  const day=dayKey();
+  const daily=state.transactions.filter(t=>t.day===day);
+  const ok=window.confirm("Save today's record to Daily Record, then clear today's active transactions? Previous Daily Records will be kept.");
+  if(!ok){showClearStatus('Clear cancelled. No records were changed.');return;}
+  btn.dataset.busy='1';btn.disabled=true;const oldText=btn.textContent;btn.textContent='Saving and clearing…';
+  try{
+    const gm=currentDayGcash();
+    const existing=state.history.find(h=>h.day===day);
+    const record={
+      day,
+      label:new Date().toLocaleDateString('en-PH',{weekday:'long',year:'numeric',month:'long',day:'numeric'}),
+      transactions:[...(existing?.transactions||[]),...daily],
+      cashFloat:existing?.cashFloat??(state.cashFloatDay===day?Number(state.cashFloat)||0:0),
+      cashRegisterClosing:dailyCashRegisterBalance(day),
+      gcashOpening:existing?.gcashOpening??gm.opening,
+      gcashClosing:gm.closing,
+      gcashChange:gm.change,
+      loadCommission:(existing?.loadCommission||0)+daily.filter(t=>t.category==='load-sale').reduce((a,t)=>a+(Number(t.profit)||0),0),
+      gcashFees:(existing?.gcashFees||0)+daily.filter(t=>['gcash-in','gcash-out'].includes(t.category)||(t.category==='credit-payment'&&Number(t.profit)>0)).reduce((a,t)=>a+Math.abs(Number(t.profit)||0),0),
+      actualCashCounted:state.dailyClosings?.[day]?.actualCashCounted ?? existing?.actualCashCounted ?? null,
+      cashDifference:state.dailyClosings?.[day]?.actualCashCounted!=null ? Number(state.dailyClosings[day].actualCashCounted)-dailyCashRegisterBalance(day) : (existing?.cashDifference ?? null),
+      closingNotes:state.dailyClosings?.[day]?.closingNotes ?? existing?.closingNotes ?? ''
+    };
+    state.history=state.history.filter(h=>h.day!==day);
+    state.history.unshift(record);
+    state.transactions=state.transactions.filter(t=>t.day!==day);
+    state.gcashDailyOpening=state.gcashDailyOpening||{};
+    state.gcashDailyOpening[day]=gm.closing;
+    state.cashFloat=record.cashRegisterClosing;
+    state.cashFloatDay=day;
+    localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));
+    render();
+    if(typeof fillAdminTxSelect==='function')fillAdminTxSelect();
+    let cloudSaved=false;
+    if(typeof window.jvsrCloudSave==='function') cloudSaved=await window.jvsrCloudSave(state);
+    if(cloudSaved===true){showClearStatus(daily.length?'Success! Today’s transactions were archived, cleared, and synced to the shared tracker.':'No active transactions were found. Today’s closing record was saved and synced.');}
+    else{showClearStatus('Saved and cleared on this device, but cloud sync was not confirmed. Check your connection and Firebase before relying on the boss seeing the update.',true);}
+  }catch(e){
+    console.error('Clear today transactions failed',e);
+    showClearStatus('Could not complete the clear. Please check the connection and try again. Your previous Daily Records were not intentionally deleted.',true);
+  }finally{btn.dataset.busy='0';btn.disabled=false;btn.textContent=oldText;}
+}
+window.jvsrRunClearToday=runClearToday;
+const clearMainButton=$('clearBtn');if(clearMainButton)clearMainButton.onclick=()=>{runClearToday();};
+// Preserve existing browser records; do not reset saved transactions on first open.
+function isGcashCredit(c){return c.kind==='gcash-credit'||/gcash.*credit|gcash sent on credit|gcash cash-out service on credit/i.test(String(c.note||''))}function persist(){localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));render();if(typeof fillAdminTxSelect==='function')fillAdminTxSelect();if(window.jvsrCloudSave)window.jvsrCloudSave(state)}
+window.jvsrGetState=()=>state;
+window.jvsrApplyCloudState=(cloudState)=>{if(!cloudState||typeof cloudState!=='object')return;jvsrApplyingCloud=true;state=cloudState;state.prices=state.prices||structuredClone(defaults);state.prices.eggs=state.prices.eggs||structuredClone(defaults.eggs);state.prices.fabricSoftener=state.prices.fabricSoftener||structuredClone(defaults.fabricSoftener);state.prices.liquidSoap=state.prices.liquidSoap||structuredClone(defaults.liquidSoap);state.prices.eggsTray=state.prices.eggsTray||{S:(Number(state.prices.eggs.S)||7)*30,M:(Number(state.prices.eggs.M)||8)*30,L:(Number(state.prices.eggs.L)||9.5)*30,XL:(Number(state.prices.eggs.XL)||11)*30};state.cashFloat=Number(state.cashFloat)||0;state.cashFloatDay=state.cashFloatDay||dayKey();state.gcashOpeningBalances=state.gcashOpeningBalances||{};state.gcashDailyOpening=state.gcashDailyOpening||{};state.inventory=state.inventory||{};state.customProducts=Array.isArray(state.customProducts)?state.customProducts:[];state.inventoryNames=state.inventoryNames||{};state.correctionLog=Array.isArray(state.correctionLog)?state.correctionLog:[];localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));fillSelects();fillSettings();refreshPrices();fillInventorySelect();fillCustomSaleSelect();refreshAdminAccess();fillAdminTxSelect();render();jvsrApplyingCloud=false;};
+function dayKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
+function today(){return state.transactions.filter(t=>t.day===dayKey())}
+function addTrans(desc,amount,profit=0,method='Cash',cash=0,category='other',gcashDelta=null){let tx={id:Date.now()+Math.random(),day:dayKey(),time:new Date().toLocaleTimeString('en-PH',{hour:'2-digit',minute:'2-digit'}),desc,amount:Number(amount)||0,profit:Number(profit)||0,method,cash:Number(cash)||0,category,createdAt:Date.now()};if(gcashDelta!==null)tx.gcashDelta=Number(gcashDelta)||0;state.transactions.push(tx);persist()}
+function monthKey(d=new Date()){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')}
+function monthLabel(d=new Date()){return d.toLocaleDateString('en-PH',{month:'long',year:'numeric'})}
+function gcashDeltaFor(t){if(typeof t.gcashDelta==='number'&&Number.isFinite(t.gcashDelta))return t.gcashDelta;if(t.category==='sale'&&t.method==='GCash')return Number(t.amount)||0;if(t.category==='sale'&&t.method==='Split Payment')return Number(t.splitGcash)||0;if(t.category==='credit-payment'&&t.method==='GCash')return Number(t.amount)||0;if(t.category==='credit-payment'&&t.method==='Split Payment')return Number(t.splitGcash)||0;if(t.category==='gcash-in'){let m=String(t.desc||'').match(/customer receives ₱([\d,]+(?:\.\d+)?)/i);return m?-Number(m[1].replace(/,/g,'')):0}if(t.category==='gcash-out'||t.category==='gcash-credit-out'){let m=String(t.desc||'').match(/GCash received ₱([\d,]+(?:\.\d+)?)/i);return m?Number(m[1].replace(/,/g,'')):0}if(t.category==='gcash-credit-in'){let m=String(t.desc||'').match(/customer receives ₱([\d,]+(?:\.\d+)?)/i);return m?-Number(m[1].replace(/,/g,'')):0}if(t.category==='gcash-credit-issued')return Number(t.gcashDelta)||0;if(t.category==='gcash-borrowed')return -Math.abs(Number(t.amount)||0);if(t.category==='load-sale')return -Math.abs(Number(t.amount)||0);return 0}
+function dailyGcashChange(day){return state.transactions.filter(t=>t.day===day).reduce((sum,t)=>sum+gcashDeltaFor(t),0)}
+function dailyGcashOpening(day=dayKey()){if(Object.prototype.hasOwnProperty.call(state.gcashDailyOpening,day))return Number(state.gcashDailyOpening[day])||0;let target=new Date(day+'T12:00:00'),targetMs=target.getTime(),month=day.slice(0,7),explicit=Object.keys(state.gcashDailyOpening).filter(k=>k.slice(0,7)===month&&k<day).sort().pop();let baseDay,base;if(explicit){baseDay=explicit;base=Number(state.gcashDailyOpening[explicit])||0}else{baseDay=month+'-01';base=Number(state.gcashOpeningBalances[month])||0}let d=new Date(baseDay+'T12:00:00');while(d.getTime()<targetMs){let k=dayKey(d);base+=dailyGcashChange(k);d.setDate(d.getDate()+1)}return base}
+function currentDayGcash(){let opening=dailyGcashOpening(),change=dailyGcashChange(dayKey());return {opening,change,closing:opening+change}}
+function currentMonthGcash(){let key=monthKey(),txs=state.transactions.filter(t=>String(t.day||'').startsWith(key)),opening=Number(state.gcashOpeningBalances[key])||0,change=txs.reduce((sum,t)=>sum+gcashDeltaFor(t),0);return {key,opening,change,closing:opening+change}}
+function fee(a){return a<=0?0:Math.ceil(a/500)*5}
+function changeTab(id){document.querySelectorAll('.page').forEach(p=>p.classList.toggle('hidden',p.id!==id));document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('active',b.dataset.tab===id));if(id==='settings')fillSettings();if(id==='admin')refreshAdminAccess();closeDrawer()}
+function closeDrawer(){$('appDrawer').classList.remove('open');$('drawerScrim').classList.remove('open')}
+$('menuToggle').addEventListener('click',()=>{$('appDrawer').classList.add('open');$('drawerScrim').classList.add('open')});$('drawerScrim').addEventListener('click',closeDrawer);document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>changeTab(b.dataset.tab)));
+// Bind Clear Today Transactions early so unrelated later initialization errors cannot leave it inert.
+// Clear button uses its direct inline action so it does not depend on listener registration.
+function fillSelects(){ $('riceType').innerHTML=state.prices.rice.map((r,i)=>`<option value="${i}">${esc(r.name)}</option>`).join('');}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function refreshPrices(){let i=+$('riceType').value||0,r=state.prices.rice[i]||state.prices.rice[0];$('ricePrice').textContent=r?`Selling price per ${$('riceUnit').value==='kg'?'kg':'bag'}: ${peso($('riceUnit').value==='kg'?r.priceKg:r.priceBag)}`:'';let ek=$('eggSize').value,eu=$('eggUnit').value,ep=eu==='tray'?(state.prices.eggsTray?.[ek]??(state.prices.eggs[ek]*30)):state.prices.eggs[ek];$('eggPrice').textContent=(eu==='tray'?'Price per tray (30 eggs): ':'Price per piece: ')+peso(ep);$('oilPrice').textContent='Price per bottle: '+peso(state.prices.oil[$('oilSize').value]);$('soapPrice').textContent='Price per bottle: '+peso(state.prices.soap[$('soapSize').value])}
+$('riceType').addEventListener('change',refreshPrices);['riceUnit','eggSize','eggUnit','oilSize','soapSize'].forEach(id=>$(id).addEventListener('change',refreshPrices));
+function collectSplitPayment(total,label='payment'){let cashRaw=prompt('STEP 1 OF 2 — Cash received for '+label+' of '+peso(total)+'. Enter the cash amount first:','0');if(cashRaw===null)return null;let cash=Number(cashRaw);if(!Number.isFinite(cash)||cash<0||cash>total+0.001){alert('Enter a valid cash amount between ₱0 and '+peso(total)+'.');return null;}let remaining=Math.max(0,Math.round((total-cash)*100)/100);let gcashRaw=prompt('STEP 2 OF 2 — Remaining amount after cash: '+peso(remaining)+'. Enter the amount paid by GCash:',String(remaining));if(gcashRaw===null)return null;let gcash=Number(gcashRaw);if(!Number.isFinite(gcash)||gcash<0||Math.abs(cash+gcash-total)>.01){alert('Cash '+peso(cash)+' + GCash '+peso(gcash)+' must equal the total '+peso(total)+'.');return null;}return {cash,gcash};}
+function sale(product,qty,price,cost,pay,cust,inventoryKey){qty=Number(qty);if(!Number.isFinite(qty)||qty<=0)return alert('Enter a valid quantity.');if(pay==='Credit'&&!cust.trim())return alert('Enter the customer name for a credit sale.');let amount=qty*price,profit=qty*(price-cost),cashPart=0,gcashPart=0;if(pay==='Split Payment'){let parts=collectSplitPayment(amount,'sale');if(!parts)return;cashPart=parts.cash;gcashPart=parts.gcash;}if(pay==='Credit')state.credits.push({id:Date.now()+Math.random(),cust:cust.trim(),note:product,amount,original:amount,paid:0,closed:false});addTrans(product,amount,profit,pay,pay==='Cash'?amount:(pay==='Split Payment'?cashPart:0),'sale',pay==='GCash'?amount:(pay==='Split Payment'?gcashPart:null));let tx=state.transactions[state.transactions.length-1];if(pay==='Split Payment'){tx.splitCash=cashPart;tx.splitGcash=gcashPart;}if(inventoryKey){tx.inventoryKey=inventoryKey;tx.inventoryQty=qty;persist()} }
+$('sellRice').onclick=()=>{let idx=+$('riceType').value,r=state.prices.rice[idx],unit=$('riceUnit').value,qty=Number($('riceQty').value),before=state.transactions.length;if(!r)return alert('Select a rice product.');sale(r.name+' ('+unit+')',$('riceQty').value,unit==='kg'?r.priceKg:r.priceBag,unit==='kg'?r.costKg:r.costBag,$('ricePay').value,$('riceCustomer').value,'rice_'+idx+'_stock');if(state.transactions.length>before){let tx=state.transactions[state.transactions.length-1];tx.inventoryQty=qty*(unit==='bag'?25:1);persist()}$('riceQty').value='';$('riceCustomer').value=''};
+$('sellEggs').onclick=()=>{let k=$('eggSize').value,u=$('eggUnit').value,q=Number($('eggQty').value),p=u==='tray'?(Number(state.prices.eggsTray?.[k]??state.prices.eggs[k]*30)):Number(state.prices.eggs[k]);if(!Number.isFinite(q)||q<=0)return alert('Enter a valid egg quantity.');if($('eggPay').value==='Credit'&&!$('eggCustomer').value.trim())return alert('Enter the customer name for a credit sale.');let before=state.transactions.length;sale('Eggs '+k+' ('+(u==='tray'?'tray':'piece')+')',$('eggQty').value,p,p*.8,$('eggPay').value,$('eggCustomer').value,'eggs_'+k);if(state.transactions.length>before&&u==='tray'){state.transactions[state.transactions.length-1].inventoryQty=q*30;persist()}$('eggQty').value='';$('eggCustomer').value=''};
+$('sellOil').onclick=()=>{let k=$('oilSize').value,p=state.prices.oil[k];sale('Cooking oil '+k,$('oilQty').value,p,p*.8,$('oilPay').value,$('oilCustomer').value,'oil_'+k);$('oilQty').value='';$('oilCustomer').value=''};
+$('sellSoap').onclick=()=>{let k=$('soapSize').value,p=state.prices.soap[k];sale('Dishwashing liquid '+k,$('soapQty').value,p,p*.7,$('soapPay').value,$('soapCustomer').value,'soap_'+k);$('soapQty').value='';$('soapCustomer').value=''};
+function scentKey(type,size,scent){return type+'_'+size+'_'+scent.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+function updateScentPrice(type){let size=$(type+'Size').value,prices=state.prices[type==='softener'?'fabricSoftener':'liquidSoap'];$(type+'Price').textContent='Selling price: '+peso(prices[size]||0)+' per bottle';}
+$('softenerSize').onchange=()=>updateScentPrice('softener');$('liquidSoapSize').onchange=()=>updateScentPrice('liquidSoap');
+$('sellSoftener').onclick=()=>{let scent=$('softenerScent').value.trim(),k=$('softenerSize').value;if(!scent)return alert('Enter the fabric softener scent.');let key=scentKey('softener',k,scent),p=state.prices.fabricSoftener[k]||0;state.inventoryNames[key]=`Fabric softener — ${scent} (${k})`;sale('Fabric softener — '+scent+' ('+k+')',$('softenerQty').value,p,p*.7,$('softenerPay').value,$('softenerCustomer').value,key);$('softenerQty').value='';$('softenerCustomer').value='';};
+$('sellLiquidSoap').onclick=()=>{let scent=$('liquidSoapScent').value.trim(),k=$('liquidSoapSize').value;if(!scent)return alert('Enter the liquid soap scent.');let key=scentKey('liquidSoap',k,scent),p=state.prices.liquidSoap[k]||0;state.inventoryNames[key]=`Liquid soap — ${scent} (${k})`;sale('Liquid soap — '+scent+' ('+k+')',$('liquidSoapQty').value,p,p*.7,$('liquidSoapPay').value,$('liquidSoapCustomer').value,key);$('liquidSoapQty').value='';$('liquidSoapCustomer').value='';};
+$('saveLoad').onclick=()=>{let a=+$('loadAmount').value,f=+$('loadCommission').value;if(a<=0||f<0||!Number.isFinite(a+f))return alert('Enter a valid load amount and commission.');state.loadSent+=a;state.loadCommission+=f;addTrans('Load sale: '+($('loadNote').value||'Customer')+' (commission '+peso(f)+')',a,f,'Cash',0,'load-sale',-a);$('loadAmount').value=$('loadCommission').value=$('loadNote').value='';};
+function updateGInPreview(){let a=+$('gin').value||0,f=fee(a);$('ginResult').textContent=`Service fee: ${peso(f)} · Customer pays total: ${peso(a+f)}`;}
+function updateGOutPreview(){let a=+$('gout').value||0,f=fee(a),mode=$('goutFeeMode').value,payout=mode==='deduct'?a-f:a,received=mode==='added'?a+f:a;let extra=mode==='added'?` · Total GCash received: ${peso(received)}`:'';$('goutResult').textContent=`Service fee: ${peso(f)} · Cash you give customer: ${peso(Math.max(0,payout))}${extra}`;}
+$('gin').oninput=updateGInPreview;
+$('gout').oninput=updateGOutPreview;
+$('goutFeeMode').onchange=updateGOutPreview;
+$('saveGIn').onclick=()=>{let a=+$('gin').value;if(!Number.isFinite(a)||a<=0)return alert('Enter a valid amount.');let f=fee(a),total=a+f;state.gcashFees+=f;addTrans('GCash cash in (customer receives '+peso(a)+', fee '+peso(f)+')',total,f,'GCash',total,'gcash-in',-a);$('gin').value='';updateGInPreview()};
+$('saveGOut').onclick=()=>{let a=+$('gout').value;if(!Number.isFinite(a)||a<=0)return alert('Enter a valid amount.');let f=fee(a),mode=$('goutFeeMode').value,payout=mode==='deduct'?a-f:a,received=mode==='added'?a+f:a;if(payout<0)return alert('The fee is greater than the amount sent.');state.gcashFees+=f;let methodText=mode==='cash'?'fee paid separately in cash':mode==='deduct'?'fee deducted from amount':'fee added by customer';let cashMovement=mode==='cash'?-payout+f:-payout;addTrans('GCash cash out (amount '+peso(a)+', '+methodText+', fee '+peso(f)+', GCash received '+peso(received)+', cash paid '+peso(payout)+')',-payout,f,'GCash',cashMovement,'gcash-out',received);state.transactions[state.transactions.length-1].gcashFeeIncluded=(mode==='added');$('gout').value='';updateGOutPreview()};
+$('addCashIn').onclick=()=>{let a=+$('cashInAmount').value;if(a<=0)return alert('Enter a valid amount.');addTrans($('cashInNote').value||'Cash received',a,0,'Cash',a,'manual-cash-in');$('cashInAmount').value=$('cashInNote').value=''};
+$('addCashOut').onclick=()=>{let a=+$('cashOutAmount').value;if(a<=0)return alert('Enter a valid amount.');addTrans($('cashOutNote').value||'Cash paid out',-a,0,'Cash',-a,'manual-cash-out');$('cashOutAmount').value=$('cashOutNote').value=''};
+$('addBorrow').onclick=()=>{let a=+$('borrowAmount').value;if(a<=0)return alert('Enter a valid amount.');addTrans('Cash borrowed'+($('borrowNote').value.trim()?' — '+$('borrowNote').value.trim():''),-a,0,'Cash',-a,'cash-borrowed');$('borrowAmount').value=$('borrowNote').value=''};
+$('addGcashBorrow').onclick=()=>{let a=+$('gcashBorrowAmount').value;if(!Number.isFinite(a)||a<=0)return alert('Enter a valid GCash amount.');addTrans('GCash borrowed'+($('gcashBorrowNote').value.trim()?' — '+$('gcashBorrowNote').value.trim():''),-a,0,'GCash',0,'gcash-borrowed',-a);$('gcashBorrowAmount').value=$('gcashBorrowNote').value=''};
+$('savePersonalTx').onclick=async()=>{const btn=$('savePersonalTx');if(btn.disabled)return;try{const type=$('personalTxType').value,raw=$('personalTxAmount').value,a=Number(raw),person=$('personalTxPerson').value.trim(),status=$('personalTxStatus');if(raw.trim()===''||!Number.isFinite(a)||a<=0){alert('Enter a valid personal GCash amount.');return;}if(!person){alert('Enter the person’s name.');$('personalTxPerson').focus();return;}btn.disabled=true;btn.textContent='Recording…';const isCashIn=type==='cash-in';const desc='GCash personal '+(isCashIn?'Cash In — GCash sent, cash received':'Cash Out — GCash received, cash paid')+' · '+person;if(isCashIn){addTrans(desc,a,0,'Personal GCash',a,'personal-gcash-out',-a);}else{addTrans(desc,-a,0,'Personal GCash',-a,'personal-gcash-in',a);}persist();$('personalTxAmount').value='';$('personalTxPerson').value='';if(status)status.textContent='Personal GCash transaction recorded for '+person+'. No fee or business profit was added.';}catch(err){console.error('Personal GCash transaction failed',err);alert('Could not record this personal GCash transaction. Please try again.');}finally{btn.disabled=false;btn.textContent='Record GCash Personal Transaction';}};
+function updateGcashCreditPreview(){let type=$('gcashCreditType').value,a=+$('gcashCreditAmount').value||0,f=fee(a);let detail=type==='in'?'GCash sent now; principal added to Credit Owed':'Cash-out service recorded as Credit Owed';$('gcashCreditPreview').textContent=`Outstanding principal: ${peso(a)} · Service fee ${peso(f)} is charged when the customer repays.`;}
+$('gcashCreditType').onchange=updateGcashCreditPreview;$('gcashCreditAmount').oninput=updateGcashCreditPreview;$('gcashCreditFeeMode').onchange=updateGcashCreditPreview;
+$('saveGcashCredit').onclick=()=>{let type=$('gcashCreditType').value,a=+$('gcashCreditAmount').value,mode=$('gcashCreditFeeMode').value;if(!Number.isFinite(a)||a<=0)return alert('Enter a valid amount.');let cust=prompt('Customer name for this GCash credit:');if(cust===null)return;if(!cust.trim())return alert('Enter the customer name.');let note=type==='in'?'GCash sent on credit':'GCash cash-out service on credit';state.credits.push({id:Date.now()+Math.random(),cust:cust.trim(),note,amount:a,original:a,paid:0,closed:false,kind:'gcash-credit',feeMode:mode});if(type==='in'){addTrans('GCash credit issued — '+cust.trim()+' (GCash sent; unpaid principal '+peso(a)+')',a,0,'Credit',0,'gcash-credit-issued',-a)}else{addTrans('GCash cash-out service on credit — '+cust.trim()+' (unpaid principal '+peso(a)+')',a,0,'Credit',0,'gcash-credit-issued',0)}$('gcashCreditAmount').value='';updateGcashCreditPreview();persist()};
+$('addCredit').onclick=()=>{let cust=$('creditName').value.trim(),a=+$('creditAmount').value;if(!cust||a<=0)return alert('Enter a customer name and valid amount.');state.credits.push({id:Date.now()+Math.random(),cust,note:$('creditNote').value||'Credit',amount:a,original:a,paid:0,closed:false});$('creditName').value=$('creditAmount').value=$('creditNote').value='';persist()};
+function updateCreditGcashFeePreview(){let method=$('creditMethod').value,a=+$('creditPayment').value||0,sel=state.credits.find(x=>String(x.id)===$('creditSelect').value&&!x.closed),eligible=!!(sel&&isGcashCredit(sel)&&(method==='GCash'||method==='Split Payment')),isGcash=method==='GCash',f=eligible?fee(a):0,mode=$('creditGcashFeeMode').value;$('creditGcashFeeOptions').classList.toggle('hidden',!eligible);$('creditGcashReceivedWrap').classList.toggle('hidden',!isGcash);if(isGcash){let receivedRaw=$('creditGcashReceived').value,received=receivedRaw===''?a+(eligible&&mode==='included'?f:0):Number(receivedRaw),feeAdded=eligible&&mode==='included'?f:0,change=Math.max(0,received-a-feeAdded);$('creditChangePreview').textContent='Change to give from physical cash register: '+peso(change)+' · GCash received: '+peso(received);}else{$('creditChangePreview').textContent='Change to give from cash register: ₱0.00';} $('creditGcashFeePreview').textContent=eligible?'GCash-transfer service fee: '+peso(f)+' · '+(mode==='cash'?'fee paid separately in cash':'fee added to GCash amount'):'No GCash transfer fee for ordinary product credit payments.';}
+$('creditMethod').onchange=()=>{if($('creditMethod').value!=='GCash')$('creditGcashReceived').value='';updateCreditGcashFeePreview()};$('creditSelect').onchange=updateCreditGcashFeePreview;$('creditPayment').oninput=updateCreditGcashFeePreview;$('creditGcashFeeMode').onchange=updateCreditGcashFeePreview;$('creditGcashReceived').oninput=updateCreditGcashFeePreview;
+$('payCredit').onclick=async()=>{const btn=$('payCredit');if(btn.dataset.busy==='1')return;try{const id=String($('creditSelect').value),a=Number($('creditPayment').value),method=$('creditMethod').value,mode=$('creditGcashFeeMode').value,c=state.credits.find(x=>String(x.id)===id&&!x.closed);if(!c||!Number.isFinite(a)||a<=0){alert('Select a customer and enter a valid payment.');return;}if(a>Number(c.amount)+0.001){alert('Payment principal is greater than the balance owed.');return;}let cashPart=0,gcashPart=0;if(method==='Split Payment'){const parts=collectSplitPayment(a,'credit payment');if(!parts)return;cashPart=parts.cash;gcashPart=parts.gcash;}else if(method==='Cash')cashPart=a;else if(method==='GCash')gcashPart=a;const feeEligible=isGcashCredit(c)&&(method==='GCash'||(method==='Split Payment'&&gcashPart>0)),f=feeEligible?fee(gcashPart):0,feeViaGcash=feeEligible&&mode==='included',cashFee=feeEligible&&mode==='cash'?f:0;let gcashReceived=gcashPart+(feeViaGcash?f:0),cashChangeOut=0;if(method==='GCash'){const raw=$('creditGcashReceived').value.trim();gcashReceived=raw===''?a+(feeViaGcash?f:0):Number(raw);if(!Number.isFinite(gcashReceived)||gcashReceived<a+(feeViaGcash?f:0)-0.001){alert('The GCash amount received must cover the principal'+(feeViaGcash?' and fee.':'.'));return;}cashChangeOut=Math.max(0,gcashReceived-a-(feeViaGcash?f:0));}if(method!=='GCash'&&method!=='Split Payment'&&method!=='Cash'){cashPart=0;gcashPart=0;}c.amount=Math.max(0,Number(c.amount)-a);c.paid=(Number(c.paid)||0)+a;if(c.amount<0.005){c.amount=0;c.closed=true;}let desc='Credit principal payment — '+c.cust+' ('+method+')';if(feeEligible){state.gcashFees=(Number(state.gcashFees)||0)+f;desc+=' · GCash-transfer fee '+peso(f)+(feeViaGcash?' included in GCash':' paid separately in cash');}if(method==='GCash'&&cashChangeOut>0)desc+=' · change returned from physical cash register '+peso(cashChangeOut);addTrans(desc,a,f,method,cashPart+cashFee,'credit-payment',method==='GCash'?gcashReceived:(method==='Split Payment'?gcashReceived:null));const tx=state.transactions[state.transactions.length-1];tx.creditPrincipal=a;if(method==='Split Payment'){tx.splitCash=cashPart+cashFee;tx.splitGcash=gcashReceived;}if(cashChangeOut>0)tx.cashChangeOut=cashChangeOut;else tx.cashChangeOut=0;$('creditPayment').value='';$('creditGcashReceived').value='';updateCreditGcashFeePreview();persist();btn.dataset.busy='1';btn.disabled=true;const oldText=btn.textContent;btn.textContent='Saving…';if(window.jvsrCloudSave){const ok=await window.jvsrCloudSave(state);if(!ok){alert('Payment was recorded on this device, but cloud saving was not confirmed. Check Firebase before relying on another device.');}else{alert('Payment recorded. GCash received: '+peso(method==='GCash'?gcashReceived:gcashPart)+'. Cash change from register: '+peso(cashChangeOut)+'.');}}else{alert('Payment recorded on this device. Cloud sync is not available in this session.');}btn.textContent=oldText;btn.disabled=false;btn.dataset.busy='0';}catch(err){console.error('Credit payment failed',err);btn.disabled=false;btn.dataset.busy='0';alert('Payment could not be recorded: '+(err&&err.message?err.message:'unexpected error'));}};
+function inventoryItems(){let a=[];state.prices.rice.forEach((r,i)=>{a.push({key:'rice_'+i+'_stock',name:r.name,unit:'bag / kg (25 kg per bag)',kind:'rice',riceIndex:i})});Object.keys(state.prices.eggs).forEach(k=>a.push({key:'eggs_'+k,name:'Eggs '+k,unit:'piece',kind:'built-in'}));Object.keys(state.prices.oil).forEach(k=>a.push({key:'oil_'+k,name:'Cooking oil '+k,unit:'bottle',kind:'built-in'}));Object.keys(state.prices.soap).forEach(k=>a.push({key:'soap_'+k,name:'Dishwashing liquid '+k,unit:'bottle',kind:'built-in'}));Object.keys(state.inventoryNames).filter(k=>k.startsWith('softener_')||k.startsWith('liquidSoap_')).forEach(k=>a.push({key:k,name:state.inventoryNames[k],unit:'bottle',kind:'built-in'}));state.customProducts.filter(p=>!p.deleted).forEach(p=>a.push({key:'custom_'+p.id,name:p.name+(p.variant?' '+p.variant:''),unit:p.unit||'piece',kind:'custom',productId:p.id,price:Number(p.price)||0,cost:Number(p.cost)||0}));return a.map(x=>({...x,name:x.kind==='custom'?x.name:(state.inventoryNames[x.key]||x.name)}))}
+function isRiceInventoryKey(key){return /^rice_\d+_stock$/.test(String(key))}
+function riceIndexFromKey(key){let m=String(key).match(/^rice_(\d+)_stock$/);return m?Number(m[1]):-1}
+function invRecord(key){if(isRiceInventoryKey(key)){let idx=riceIndexFromKey(key);if(!state.inventory[key]){let oldKg=state.inventory['rice_'+idx+'_kg']||{},oldBag=state.inventory['rice_'+idx+'_bag']||{};state.inventory[key]={opening:(Number(oldKg.opening)||0)+(Number(oldBag.opening)||0)*25,added:(Number(oldKg.added)||0)+(Number(oldBag.added)||0)*25,baselineDay:oldKg.baselineDay||oldBag.baselineDay||dayKey(),baselineAt:0};if(oldKg.lastCount!=null||oldBag.lastCount!=null){state.inventory[key].lastCount=(Number(oldKg.lastCount)||0)+(Number(oldBag.lastCount)||0)*25;state.inventory[key].lastCountDay=oldKg.lastCountDay||oldBag.lastCountDay||'';}}return state.inventory[key]}if(!state.inventory[key])state.inventory[key]={opening:0,added:0,baselineDay:dayKey()};return state.inventory[key]}
+function invSold(key){let rec=invRecord(key),base=Number(rec.baselineAt)||0;if(isRiceInventoryKey(key)){let idx=riceIndexFromKey(key),canonical=state.transactions.filter(t=>t.category==='sale'&&t.inventoryKey===key&&(Number(t.createdAt)||0)>=base).reduce((sum,t)=>sum+Math.max(0,Number(t.inventoryQty)||0),0),legacyKgRec=state.inventory['rice_'+idx+'_kg']||{},legacyBagRec=state.inventory['rice_'+idx+'_bag']||{},legacyKg=state.transactions.filter(t=>t.category==='sale'&&t.inventoryKey==='rice_'+idx+'_kg'&&(Number(t.createdAt)||0)>=Math.max(Number(legacyKgRec.baselineAt)||0,base)).reduce((sum,t)=>sum+Math.max(0,Number(t.inventoryQty)||0),0),legacyBag=state.transactions.filter(t=>t.category==='sale'&&t.inventoryKey==='rice_'+idx+'_bag'&&(Number(t.createdAt)||0)>=Math.max(Number(legacyBagRec.baselineAt)||0,base)).reduce((sum,t)=>sum+Math.max(0,Number(t.inventoryQty)||0)*25,0);return canonical+legacyKg+legacyBag}return state.transactions.filter(t=>t.category==='sale'&&t.inventoryKey===key&&(Number(t.createdAt)||0)>=base).reduce((sum,t)=>sum+Math.max(0,Number(t.inventoryQty)||0),0)}
+function invStock(key){let r=invRecord(key);return (Number(r.opening)||0)+(Number(r.added)||0)-invSold(key)}
+function riceQtyLabel(kg){kg=Math.max(0,Math.round((Number(kg)||0)*100)/100);let bags=Math.floor(kg/25),rem=Math.round((kg-bags*25)*100)/100;if(bags&&rem)return `${bags} bag${bags===1?'':'s'} + ${rem} kg (${kg} kg)`;if(bags)return `${bags} bag${bags===1?'':'s'} (${kg} kg)`;return `${kg} kg`}
+function inventoryQtyToBase(key,q,unit){return isRiceInventoryKey(key)&&unit==='bag'?q*25:q}
+function updateInventoryUnitUI(){let key=$('invProduct').value;let rice=isRiceInventoryKey(key);$('invQtyUnit').closest('label').classList.toggle('hidden',!rice);if(!rice)$('invQtyUnit').value='kg'}
+function fillInventorySelect(){let items=inventoryItems();$('invProduct').innerHTML=items.map(x=>`<option value="${x.key}">${esc(x.name)} — ${x.unit}</option>`).join('');updateInventoryUnitUI();renderInventory()}
+function renderInventory(){let items=inventoryItems();$('inventoryRows').innerHTML=items.map(x=>{let r=invRecord(x.key),sold=invSold(x.key),left=invStock(x.key),isRice=x.kind==='rice';return `<tr><td>${esc(x.name)}</td><td>${esc(x.unit)}</td><td>${isRice?riceQtyLabel(r.opening):Number(r.opening)||0}</td><td>${isRice?riceQtyLabel(r.added):Number(r.added)||0}</td><td>${isRice?riceQtyLabel(sold):sold}</td><td><strong>${isRice?riceQtyLabel(left):left}</strong></td><td>${r.lastCount==null?'—':(isRice?riceQtyLabel(r.lastCount):Number(r.lastCount))}</td><td><button class="blue" style="width:auto;padding:5px 8px;font-size:12px" data-inv="${x.key}">Select</button></td></tr>`}).join('');$('inventoryRows').querySelectorAll('[data-inv]').forEach(b=>b.onclick=()=>{$('invProduct').value=b.dataset.inv;updateInventoryUnitUI();let r=invRecord(b.dataset.inv);$('invBeginningQty').value='';$('invAddQty').value='';$('invCountQty').value='';if(isRiceInventoryKey(b.dataset.inv))$('invQtyUnit').value='bag';});}
+$('invProduct').addEventListener('change',updateInventoryUnitUI);
+$('invSaveBeginning').onclick=()=>{if(!adminUnlocked)return alert('Unlock Admin to modify inventory.');let key=$('invProduct').value,raw=$('invBeginningQty').value,q=Number(raw);if(raw.trim()===''||!Number.isFinite(q)||q<0)return alert('Enter a valid beginning stock (zero is allowed).');let r=invRecord(key),base=inventoryQtyToBase(key,q,$('invQtyUnit').value);r.opening=base;r.added=0;r.baselineAt=Date.now();r.baselineDay=dayKey();r.lastCount=null;delete r.lastCountDay;persist();renderInventory();$('invBeginningQty').value='';alert('Beginning stock saved. Previous sales are kept in history and sales after this new baseline will reduce stock.');};
+$('invSaveAdd').onclick=()=>{if(!adminUnlocked)return alert('Unlock Admin to modify inventory.');let key=$('invProduct').value,raw=$('invAddQty').value,q=Number(raw);if(raw.trim()===''||!Number.isFinite(q)||q<=0)return alert('Enter a valid quantity added.');let r=invRecord(key);r.added=(Number(r.added)||0)+inventoryQtyToBase(key,q,$('invQtyUnit').value);persist();renderInventory();$('invAddQty').value='';alert('Stock addition recorded.')};
+$('invSaveCount').onclick=()=>{if(!adminUnlocked)return alert('Unlock Admin to modify inventory.');let key=$('invProduct').value,raw=$('invCountQty').value,q=Number(raw);if(raw.trim()===''||!Number.isFinite(q)||q<0)return alert('Enter the actual physical count (zero is allowed).');let r=invRecord(key),base=inventoryQtyToBase(key,q,$('invQtyUnit').value);r.opening=base;r.added=0;r.baselineDay=dayKey();r.baselineAt=Date.now();r.lastCount=base;r.lastCountDay=dayKey();persist();renderInventory();$('invCountQty').value='';alert('Weekly physical count saved.')};
+// Admin password and product catalog management
+function adminHash(text){let h=2166136261;for(let i=0;i<text.length;i++){h^=text.charCodeAt(i);h=Math.imul(h,16777619)}return 'jvsr-'+(h>>>0).toString(16)}
+function adminIsSet(){return !!localStorage.getItem('jvsr_admin_password_hash')}
+let adminUnlocked=false;
+function refreshAdminAccess(){let boss=!!(window.jvsrIsBoss&&window.jvsrIsBoss());let cc=$('adminCorrectionCard');if(cc)cc.classList.toggle('hidden',!boss);let set=adminIsSet();$('adminSetup').classList.toggle('hidden',!boss||set);$('adminLogin').classList.toggle('hidden',!boss||!set||adminUnlocked);$('adminUnlocked').classList.toggle('hidden',!boss||!adminUnlocked);$('adminTools').classList.toggle('hidden',!boss||!adminUnlocked);$('inventoryAdminTools').classList.toggle('hidden',!boss||!adminUnlocked);if(boss&&adminUnlocked){renderAdminProducts();fillAdminTxSelect()}}
+$('adminSetPass').onclick=()=>{let a=$('adminNewPass').value,b=$('adminConfirmPass').value;if(a.length<4)return alert('Use at least 4 characters for the admin password.');if(a!==b)return alert('The passwords do not match.');localStorage.setItem('jvsr_admin_password_hash',adminHash(a));adminUnlocked=true;$('adminNewPass').value=$('adminConfirmPass').value='';refreshAdminAccess();alert('Admin password set. Keep it somewhere safe.')};
+$('adminLoginBtn').onclick=()=>{if(adminHash($('adminPassInput').value)!==localStorage.getItem('jvsr_admin_password_hash'))return alert('Incorrect admin password.');adminUnlocked=true;$('adminPassInput').value='';refreshAdminAccess()};
+$('adminLockBtn').onclick=()=>{adminUnlocked=false;refreshAdminAccess()};
+function renderAdminProducts(){let items=inventoryItems();$('adminProductRows').innerHTML=items.map(x=>{let cp=x.kind==='custom'?state.customProducts.find(p=>String(p.id)===String(x.productId)):null;return `<tr><td><input data-ap-name="${esc(x.key)}" value="${esc(cp?cp.name:x.name)}" aria-label="Product name"></td><td><input data-ap-variant="${esc(x.key)}" value="${esc(cp?(cp.variant||''):x.unit)}" aria-label="Variant"><input data-ap-unit="${esc(x.key)}" value="${esc(x.unit)}" aria-label="Stock unit" ${cp?'':'disabled'}></td><td>${cp?`<input data-ap-price="${x.productId}" type="number" min="0" step="0.01" value="${Number(x.price)||0}" aria-label="Selling price">`:'Built-in'}</td><td><div class="admin-actions"><button class="blue" data-ap-save="${esc(x.key)}">Save</button>${cp?`<button class="red" data-ap-delete="${x.productId}">Delete</button>`:''}</div></td></tr>`}).join('');$('adminProductRows').querySelectorAll('[data-ap-save]').forEach(b=>b.onclick=()=>{if(!adminUnlocked)return alert('Unlock Admin first.');let key=b.dataset.apSave,name=$('adminProductRows').querySelector(`[data-ap-name="${CSS.escape(key)}"]`).value.trim();if(!name)return alert('Product name cannot be empty.');if(key.startsWith('custom_')){let id=key.slice(7),p=state.customProducts.find(x=>String(x.id)===id);if(p){let variant=$('adminProductRows').querySelector(`[data-ap-variant="${CSS.escape(key)}"]`).value.trim(),unit=$('adminProductRows').querySelector(`[data-ap-unit="${CSS.escape(key)}"]`).value.trim();if(!unit)return alert('Stock unit cannot be empty.');p.name=name;p.variant=variant;p.unit=unit;p.price=Number($('adminProductRows').querySelector(`[data-ap-price="${CSS.escape(id)}"]`).value)||0;}}else{state.inventoryNames[key]=name;}persist();fillInventorySelect();renderAdminProducts();fillCustomSaleSelect();alert('Product details saved.');});$('adminProductRows').querySelectorAll('[data-ap-delete]').forEach(b=>b.onclick=()=>{if(!adminUnlocked)return alert('Unlock Admin first.');let p=state.customProducts.find(x=>String(x.id)===b.dataset.apDelete);if(!p)return;if(!confirm('Delete '+p.name+' from active inventory and product sales? Past transactions will remain in history.'))return;p.deleted=true;persist();fillInventorySelect();renderAdminProducts();fillCustomSaleSelect();});}
+$('adminAddProduct').onclick=()=>{if(!adminUnlocked)return alert('Unlock Admin first.');let name=$('adminProductName').value.trim(),variant=$('adminProductVariant').value.trim(),unit=$('adminProductUnit').value.trim(),cost=Number($('adminProductCost').value),price=Number($('adminProductPrice').value);if(!name||!unit)return alert('Enter a product name and stock unit.');if(!Number.isFinite(cost)||cost<0||!Number.isFinite(price)||price<0)return alert('Enter valid cost and selling price.');let id='p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);state.customProducts.push({id,name,variant,unit,cost,price,deleted:false});persist();['adminProductName','adminProductVariant','adminProductUnit','adminProductCost','adminProductPrice'].forEach(id=>$ (id).value='');fillInventorySelect();renderAdminProducts();fillCustomSaleSelect();alert('Product added to inventory and product sales.');};
+function fillCustomSaleSelect(){let items=state.customProducts.filter(p=>!p.deleted);$('customSaleProduct').innerHTML=items.length?items.map(p=>`<option value="${esc(p.id)}">${esc(p.name+(p.variant?' '+p.variant:''))} — ${peso(p.price)} / ${esc(p.unit)}</option>`).join(''):'<option value="">No admin-added products yet</option>';updateCustomSalePrice()}
+function updateCustomSalePrice(){let p=state.customProducts.find(x=>String(x.id)===$('customSaleProduct').value&&!x.deleted);$('customSalePrice').textContent=p?`Price: ${peso(p.price)} each · Cost: ${peso(p.cost)} each · Unit: ${p.unit}`:'Add a product in Admin to use this sale form.'}
+$('customSaleProduct').onchange=updateCustomSalePrice;
+$('customSaleSave').onclick=()=>{let p=state.customProducts.find(x=>String(x.id)===$('customSaleProduct').value&&!x.deleted),raw=$('customSaleQty').value,qty=Number(raw),pay=$('customSalePay').value,cust=$('customSaleCustomer').value;if(!p)return alert('Add a product in Admin first.');if(raw.trim()===''||!Number.isFinite(qty)||qty<=0)return alert('Enter a valid quantity.');if(pay==='Credit'&&!cust.trim())return alert('Enter the customer name for a credit sale.');let desc=p.name+(p.variant?' '+p.variant:'');sale(desc,$('customSaleQty').value,Number(p.price)||0,Number(p.cost)||0,pay,cust,'custom_'+p.id);$('customSaleQty').value='';$('customSaleCustomer').value='';};
+function fillSettings(){let r=state.prices.rice;$('riceSettings').innerHTML=r.map((x,i)=>`<div class="item"><input id="rn${i}" value="${esc(x.name)}" placeholder="Rice name"><div class="row"><label>Selling price / kg<input id="rp${i}" type="number" min="0" step="0.01" value="${x.priceKg}"></label><label>Selling price / bag<input id="rpb${i}" type="number" min="0" step="0.01" value="${x.priceBag}"></label></div></div>`).join('');[['pEggS',state.prices.eggs.S],['pEggM',state.prices.eggs.M],['pEggL',state.prices.eggs.L],['pEggXL',state.prices.eggs.XL],['pEggTrayS',(state.prices.eggsTray||{}).S??state.prices.eggs.S*30],['pEggTrayM',(state.prices.eggsTray||{}).M??state.prices.eggs.M*30],['pEggTrayL',(state.prices.eggsTray||{}).L??state.prices.eggs.L*30],['pEggTrayXL',(state.prices.eggsTray||{}).XL??state.prices.eggs.XL*30],['pOil350',state.prices.oil['350ml']],['pOil1',state.prices.oil['1L']],['pOil15',state.prices.oil['1.5L']],['pSoap250',state.prices.soap['250ml']],['pSoap500',state.prices.soap['500ml']],['pSoap1',state.prices.soap['1L']],['pSoft250',state.prices.fabricSoftener['250ml']],['pSoft500',state.prices.fabricSoftener['500ml']],['pSoft1',state.prices.fabricSoftener['1L']],['pLiquid250',state.prices.liquidSoap['250ml']],['pLiquid500',state.prices.liquidSoap['500ml']],['pLiquid1',state.prices.liquidSoap['1L']]].forEach(([id,v])=>$(id).value=v);updateScentPrice('softener');updateScentPrice('liquidSoap')}
+$('saveRicePrices').onclick=()=>{state.prices.rice=state.prices.rice.map((x,i)=>({name:$('rn'+i).value.trim()||'Rice '+(i+1),costKg:Number(x.costKg)||0,priceKg:+$('rp'+i).value||0,costBag:Number(x.costBag)||0,priceBag:+$('rpb'+i).value||0}));persist();fillSelects();refreshPrices();fillInventorySelect();alert('Rice prices saved.')};
+$('saveEggPrices').onclick=()=>{state.prices.eggs={S:+$('pEggS').value||0,M:+$('pEggM').value||0,L:+$('pEggL').value||0,XL:+$('pEggXL').value||0};state.prices.eggsTray={S:+$('pEggTrayS').value||0,M:+$('pEggTrayM').value||0,L:+$('pEggTrayL').value||0,XL:+$('pEggTrayXL').value||0};persist();refreshPrices();fillInventorySelect();alert('Egg prices saved.')};
+$('saveOilPrices').onclick=()=>{state.prices.oil={'350ml':+$('pOil350').value||0,'1L':+$('pOil1').value||0,'1.5L':+$('pOil15').value||0};persist();refreshPrices();fillInventorySelect();alert('Oil prices saved.')};
+$('saveSoapPrices').onclick=()=>{state.prices.soap={'250ml':+$('pSoap250').value||0,'500ml':+$('pSoap500').value||0,'1L':+$('pSoap1').value||0};persist();refreshPrices();fillInventorySelect();alert('Dishwashing liquid prices saved.')};
+$('saveSoftPrices').onclick=()=>{state.prices.fabricSoftener={'250ml':+$('pSoft250').value||0,'500ml':+$('pSoft500').value||0,'1L':+$('pSoft1').value||0};persist();updateScentPrice('softener');alert('Fabric softener prices saved.')};$('saveLiquidPrices').onclick=()=>{state.prices.liquidSoap={'250ml':+$('pLiquid250').value||0,'500ml':+$('pLiquid500').value||0,'1L':+$('pLiquid1').value||0};persist();updateScentPrice('liquidSoap');alert('Liquid soap prices saved.')};
+$('saveCashFloat').onclick=async(event)=>{if(event)event.preventDefault();const btn=$('saveCashFloat'),input=$('cashFloatInput'),raw=input.value,v=Number(raw);if(raw.trim()===''||!Number.isFinite(v)||v<0){alert('Enter a valid opening cash float (₱0 or more).');input.focus();return;}const oldText=btn.textContent;btn.disabled=true;btn.textContent='Saving…';try{state.cashFloat=v;state.cashFloatDay=dayKey();localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));render();if(typeof fillAdminTxSelect==='function')fillAdminTxSelect();let cloudOK=null;if(typeof window.jvsrCloudSave==='function'){cloudOK=await window.jvsrCloudSave(state);}if(cloudOK===true){alert('Opening cash float saved on this device and shared save confirmed.');}else if(cloudOK===false){alert('Opening cash float saved on this device, but cloud sync was not confirmed. Check Firebase before relying on the other device.');}else{alert('Opening cash float saved on this device. Cloud sync is not available in this session.');}}catch(err){console.error('Opening cash float save failed:',err);try{localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));render();}catch(storageErr){console.error(storageErr);}alert('Could not confirm the opening cash float save: '+(err&&err.message?err.message:'unexpected error')+'. Please check the displayed saved amount.');}finally{btn.disabled=false;btn.textContent=oldText;}};
+$('editGcashOpeningBtn').onclick=()=>{$('gcashOpeningEditor').classList.toggle('hidden');$('gcashOpeningInput').value=dailyGcashOpening();};
+$('saveGcashOpening').onclick=()=>{let raw=$('gcashOpeningInput').value,v=Number(raw);if(raw.trim()===''||!Number.isFinite(v)||v<0)return alert('Enter a valid opening GCash balance.');state.gcashDailyOpening[dayKey()]=v;persist();$('gcashOpeningEditor').classList.add('hidden');alert('Opening GCash balance updated. Closing balance remains automatic.');};
+function currentClosing(){state.dailyClosings=state.dailyClosings||{};if(!state.dailyClosings[dayKey()])state.dailyClosings[dayKey()]={actualCashCounted:null,closingNotes:''};return state.dailyClosings[dayKey()];}
+function updateCashCountResult(){const input=$('actualCashCountedInput'),result=$('cashCountResult');if(!input||!result)return;const raw=input.value;if(raw===''){result.className='cash-check-result';result.textContent='Enter your actual cash count to check the difference.';return;}const actual=Number(raw),expected=dailyCashRegisterBalance(dayKey()),diff=actual-expected;result.className='cash-check-result'+(diff>0.009?' over':diff<-.009?' short':'');result.textContent=Math.abs(diff)<=.009?'BALANCED · '+peso(actual)+' counted matches expected balance '+peso(expected):diff>0?'OVER by '+peso(diff)+' · Counted '+peso(actual)+'; expected '+peso(expected):'SHORT by '+peso(Math.abs(diff))+' · Counted '+peso(actual)+'; expected '+peso(expected);}
+$('saveCashCountBtn').onclick=async(event)=>{if(event)event.preventDefault();const btn=$('saveCashCountBtn'),input=$('actualCashCountedInput'),raw=input.value.trim(),amount=Number(raw);if(raw===''||!Number.isFinite(amount)||amount<0){alert('Enter a valid actual cash count of ₱0 or more.');input.focus();return;}if(btn.dataset.busy==='1')return;const oldText=btn.textContent;btn.dataset.busy='1';btn.disabled=true;btn.textContent='Saving…';try{const closing=currentClosing();closing.actualCashCounted=amount;closing.cashDifference=amount-dailyCashRegisterBalance(dayKey());localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));render();updateCashCountResult();let cloudOK=null;if(typeof window.jvsrCloudSave==='function')cloudOK=await window.jvsrCloudSave(state);if(cloudOK===true){alert('Cash count saved and shared save confirmed. This does not change transaction totals.');}else if(cloudOK===false){alert('Cash count saved on this device, but cloud sync was not confirmed. Check Firebase before relying on the other device.');}else{alert('Cash count saved on this device. Cloud sync is not available in this session.');}}catch(err){console.error('Save cash count failed:',err);try{localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));}catch(storageErr){console.error('Local cash count save failed:',storageErr);}alert('Could not fully confirm the cash count save: '+(err&&err.message?err.message:'unexpected error')+'. Please check the displayed count before trying again.');}finally{btn.disabled=false;btn.dataset.busy='0';btn.textContent=oldText;}};
+$('saveClosingNotesBtn').onclick=()=>{currentClosing().closingNotes=$('closingNotesInput').value.trim();persist();$('closingNotesStatus').textContent='Closing notes saved on this device and sent for shared sync when available. They will be attached to the Daily Record for '+new Date().toLocaleDateString('en-PH')+'.';};
+$('actualCashCountedInput').addEventListener('input',updateCashCountResult);
+function loadClosingInputs(){const c=(state.dailyClosings||{})[dayKey()]||{};$('actualCashCountedInput').value=c.actualCashCounted==null?'':String(c.actualCashCounted);$('closingNotesInput').value=c.closingNotes||'';updateCashCountResult();}
+
+
+function render(){let ts=today();if($('actualCashCountedInput')){const c=(state.dailyClosings||{})[dayKey()]||{};$('actualCashCountedInput').value=c.actualCashCounted==null?'':String(c.actualCashCounted);if(document.activeElement!==$('closingNotesInput'))$('closingNotesInput').value=c.closingNotes||'';if($('adminClosingNotesView'))$('adminClosingNotesView').textContent=c.closingNotes||'No closing notes saved for today.';updateCashCountResult();}let productIncome=ts.filter(t=>t.category==='sale').reduce((s,t)=>s+Math.abs(Number(t.amount)||0),0),loadIncomeToday=ts.filter(t=>t.category==='load-sale').reduce((s,t)=>s+Math.abs(Number(t.profit)||0),0),manualCashIn=ts.filter(t=>t.category==='manual-cash-in').reduce((s,t)=>s+Math.abs(Number(t.cash)||0),0),gcashCashInCollected=ts.filter(t=>['gcash-in'].includes(t.category)).reduce((s,t)=>s+Math.abs(Number(t.cash)||0),0),gcashInFeesToday=ts.filter(t=>t.category==='gcash-in').reduce((sum,t)=>sum+Math.abs(Number(t.profit)||0),0),gcashOutFeesToday=ts.filter(t=>t.category==='gcash-out'||(t.category==='credit-payment'&&Math.abs(Number(t.profit)||0)>0)).reduce((sum,t)=>sum+Math.abs(Number(t.profit)||0),0),dailyFees=gcashInFeesToday+gcashOutFeesToday,sales=productIncome+loadIncomeToday+manualCashIn+gcashCashInCollected+ts.filter(t=>['gcash-out'].includes(t.category)).reduce((s,t)=>s+Math.abs(Number(t.profit)||0),0),profit=ts.reduce((s,t)=>s+t.profit,0),gcashInTotal=ts.filter(t=>['gcash-in','load-sale','personal-gcash-out'].includes(t.category)).reduce((sum,t)=>sum+Math.max(0,-gcashDeltaFor(t)),0),gcashOutTotal=ts.filter(t=>(t.category==='gcash-out'||t.category==='personal-gcash-in'||(t.category==='credit-payment'&&(t.method==='GCash'||t.method==='Split Payment')))).reduce((sum,t)=>sum+Math.max(0,gcashDeltaFor(t)-(t.gcashFeeIncluded?Math.abs(Number(t.profit)||0):0)),0);$('sales').textContent=peso(sales);let expenseTotal=ts.filter(t=>['manual-cash-out','cash-borrowed','gcash-out','gcash-credit-out'].includes(t.category)).reduce((sum,t)=>sum+Math.abs(Number(t.cash)||0),0);$('profit').textContent=peso(profit);$('cashInView').textContent=peso(gcashInTotal);$('cashOutView').textContent=peso(gcashOutTotal);$('gcashInFeesView').textContent=peso(gcashInFeesToday);$('gcashOutFeesView').textContent=peso(gcashOutFeesToday);let cashRegisterIn=ts.reduce((sum,t)=>{if(t.category==='sale'&&t.method==='Cash')return sum+Math.abs(Number(t.amount)||0);if(t.category==='sale'&&t.method==='Split Payment')return sum+Math.abs(Number(t.splitCash??t.cash)||0);if(t.category==='manual-cash-in'||t.category==='personal-cash-in'||t.category==='personal-gcash-out')return sum+Math.abs(Number(t.cash)||0);if(t.category==='gcash-in')return sum+Math.abs(Number(t.cash)||0);if(t.category==='credit-payment'&&t.method==='Cash')return sum+Math.abs(Number(t.amount)||0);if(t.category==='credit-payment'&&t.method==='Split Payment')return sum+Math.abs(Number(t.splitCash??t.cash)||0);if(t.category==='credit-payment'&&t.method==='GCash')return sum+Math.abs(Number(t.cash)||0);if(t.category==='credit-payment'&&t.method==='Split Payment')return sum+Math.abs(Number(t.splitCash??t.cash)||0);if(t.category==='load-sale')return sum+Math.abs(Number(t.amount)||0)+Math.abs(Number(t.profit)||0);return sum},0),cashRegisterOut=ts.reduce((sum,t)=>{if(['manual-cash-out','personal-cash-out','personal-gcash-in','gcash-out','cash-borrowed'].includes(t.category))return sum+Math.abs(Number(t.cash)||0);if(t.category==='credit-payment')return sum+Math.abs(Number(t.cashChangeOut)||0);return sum},0);let registerEnd=(state.cashFloatDay===dayKey()?state.cashFloat:0)+cashRegisterIn-cashRegisterOut;$('registerBalance').textContent=peso(registerEnd);$('cashFloatSaved').textContent=peso(state.cashFloatDay===dayKey()?state.cashFloat:0);$('loadIncome').textContent=peso(loadIncomeToday);$('creditOwed').textContent=peso(state.credits.filter(c=>!c.closed&&!isGcashCredit(c)).reduce((s,c)=>s+(Number(c.amount)||0),0));$('gcashCreditOwed').textContent=peso(state.credits.filter(c=>!c.closed&&isGcashCredit(c)).reduce((s,c)=>s+(Number(c.amount)||0),0));$('loadSent').textContent=peso(state.loadSent);$('loadCommissionTotal').textContent=peso(state.loadCommission);let gm=currentDayGcash(),gmonth=currentMonthGcash();$('gcashMonthLabel').textContent=monthLabel()+' · '+new Date().toLocaleDateString('en-PH');if($('gcashOpeningInput'))$('gcashOpeningInput').value=gm.opening;$('gcashOpeningView').textContent=peso(gm.opening);$('gcashOpeningViewCard').textContent=peso(gm.opening);$('gcashClosingView').textContent=peso(gm.closing);$('gcashChangeView').textContent='Today net change: '+(gm.change>0?'+':'')+peso(gm.change)+' · Monthly net change: '+(gmonth.change>0?'+':'')+peso(gmonth.change);
+$('transactions').innerHTML=ts.length?ts.slice().reverse().map(t=>`<tr><td>${esc(t.time)}</td><td>${esc(t.desc)}<div class="pill">${esc(t.method)}</div></td><td>${peso(t.amount)}</td></tr>`).join(''):'<tr><td colspan="3" style="text-align:center;color:#999;padding:15px">No records yet</td></tr>';
+
+let open=state.credits.filter(c=>!c.closed);$('creditSelect').innerHTML='<option value="">Select customer</option>'+open.map(c=>`<option value="${c.id}">${isGcashCredit(c)?'💜 GCash Credit — ':'Credit — '}${esc(c.cust)} — ${peso(c.amount)} due</option>`).join('');$('creditList').innerHTML=open.length?open.map(c=>`<div class="item"><strong>${isGcashCredit(c)?'💜 GCash Credit: ':'📋 Credit: '}${esc(c.cust)}</strong><br>${esc(c.note)}<br>Balance: <strong>${peso(c.amount)}</strong> <button class="del" data-credit-del="${c.id}">Delete</button></div>`).join(''):'<p class="small">No outstanding credit records.</p>';$('creditList').querySelectorAll('[data-credit-del]').forEach(b=>b.onclick=()=>{if(confirm('Delete this credit record?')){state.credits=state.credits.filter(c=>String(c.id)!==b.dataset.creditDel);persist()}});
+$('history').innerHTML=state.history.length?state.history.map((h,i)=>`<details class="daily-record" ${i===0?'open':''}><summary><span><strong>${esc(h.label||h.day||'Daily Record')}</strong><small>${(h.transactions||[]).length} transactions · Cash ${peso(h.cashRegisterClosing||0)} · GCash ${peso(h.gcashClosing||0)}</small></span><span class="record-chevron">⌄</span></summary><div class="daily-record-body"><div class="record-balances"><div><small>Opening cash float</small><strong>${peso(h.cashFloat||0)}</strong></div><div><small>Cash register closing</small><strong>${peso(h.cashRegisterClosing||0)}</strong></div><div><small>GCash opening</small><strong>${peso(h.gcashOpening||0)}</strong></div><div><small>GCash closing</small><strong>${peso(h.gcashClosing||0)}</strong></div><div><small>Actual cash counted</small><strong>${h.actualCashCounted==null?'Not entered':peso(h.actualCashCounted)}</strong></div><div><small>Over / Short</small><strong>${h.cashDifference==null?'Not entered':(Number(h.cashDifference)>0?'Over ':Number(h.cashDifference)<0?'Short ':'Balanced ')+peso(Math.abs(Number(h.cashDifference)))}</strong></div><div><small>Load income</small><strong>${peso(h.loadCommission||0)}</strong></div><div><small>GCash fees</small><strong>${peso(h.gcashFees||0)}</strong></div></div>${h.closingNotes?`<h3>Closing Notes for Admin</h3><p class="small">${esc(h.closingNotes)}</p>`:''}<h3>Transaction History</h3>${(h.transactions||[]).length?`<div class="table-wrap"><table><thead><tr><th>Time</th><th>Description</th><th>Amount</th><th>Method</th></tr></thead><tbody>${(h.transactions||[]).slice().sort((a,b)=>(b.createdAt||0)-(a.createdAt||0)).map(t=>`<tr><td>${esc(t.time||'—')}</td><td>${esc(t.desc||'Transaction')}</td><td>${peso(t.amount||0)}</td><td>${esc(t.method||'—')}</td></tr>`).join('')}</tbody></table></div>`:'<p class="small">No transactions saved for this date.</p>'}</div></details>`).join(''):'<p class="small">No daily records yet. Clear today’s transactions to save a daily record here.</p>';
+}
+function fillAdminTxSelect(){
+  const sel=$('adminTxSelect');if(!sel)return;
+  const active=state.transactions.filter(t=>t.day===dayKey());
+  const options=[];
+  active.forEach(t=>options.push(`<option value="active:${esc(t.id)}">Today · ${esc(t.time||'')} · ${esc(t.desc||'Transaction')} · ${peso(t.amount)}</option>`));
+  (state.history||[]).forEach((record,hi)=>{(record.transactions||[]).forEach((t,ti)=>options.push(`<option value="archived:${hi}:${ti}">Daily Record · ${esc(record.label||record.day||'Past date')} · ${esc(t.time||'')} · ${esc(t.desc||'Transaction')} · ${peso(t.amount)}</option>`));});
+  sel.innerHTML=options.length?options.join(''):'<option value="">No transactions available</option>';
+  const log=$('adminCorrectionHistory');if(log)log.innerHTML=state.correctionLog.length?'<strong>Recent corrections:</strong><br>'+state.correctionLog.slice(-8).reverse().map(x=>esc(x.when+' — '+x.by+' corrected '+x.description)).join('<br>'):'No corrections recorded yet.';
+}
+function getAdminSelectedTx(){
+  const value=$('adminTxSelect')?.value||'';
+  if(value.startsWith('active:')){const id=value.slice(7);const t=state.transactions.find(x=>String(x.id)===id);return t?{t,archived:false,record:null}:null;}
+  if(value.startsWith('archived:')){const parts=value.split(':');const hi=Number(parts[1]),ti=Number(parts[2]);const record=state.history?.[hi],t=record?.transactions?.[ti];return t?{t,archived:true,record}:null;}
+  // Backward compatibility with an older dropdown value during hot reload.
+  const t=state.transactions.find(x=>String(x.id)===value);return t?{t,archived:false,record:null}:null;
+}
+function recalculateArchivedRecord(record){
+  const ts=record.transactions||[];
+  const cashIn=ts.reduce((sum,t)=>{if(t.category==='sale'&&t.method==='Cash')return sum+Math.abs(Number(t.amount)||0);if(t.category==='sale'&&t.method==='Split Payment')return sum+Math.abs(Number(t.splitCash??t.cash)||0);if(t.category==='manual-cash-in'||t.category==='gcash-in')return sum+Math.abs(Number(t.cash)||0);if(t.category==='credit-payment'&&t.method==='Cash')return sum+Math.abs(Number(t.amount)||0);if(t.category==='credit-payment'&&t.method==='Split Payment')return sum+Math.abs(Number(t.splitCash??t.cash)||0);if(t.category==='credit-payment'&&t.method==='GCash')return sum+Math.abs(Number(t.cash)||0);if(t.category==='load-sale')return sum+Math.abs(Number(t.amount)||0)+Math.abs(Number(t.profit)||0);return sum;},0);
+  const cashOut=ts.reduce((sum,t)=>['manual-cash-out','gcash-out','cash-borrowed'].includes(t.category)?sum+Math.abs(Number(t.cash)||0):sum,0);
+  record.cashRegisterClosing=(Number(record.cashFloat)||0)+cashIn-cashOut;
+  record.gcashChange=ts.reduce((sum,t)=>sum+gcashDeltaFor(t),0);
+  record.gcashClosing=(Number(record.gcashOpening)||0)+(Number(record.gcashChange)||0);
+  record.loadCommission=ts.filter(t=>t.category==='load-sale').reduce((sum,t)=>sum+(Number(t.profit)||0),0);
+  record.gcashFees=ts.filter(t=>['gcash-in','gcash-out'].includes(t.category)||(t.category==='credit-payment'&&Number(t.profit)>0)).reduce((sum,t)=>sum+Math.abs(Number(t.profit)||0),0);
+}
+function loadAdminTx(){try{if(!(window.jvsrIsBoss&&window.jvsrIsBoss()))return alert('Only the boss account can correct transactions.');const selected=getAdminSelectedTx();if(!selected)return alert('Select a transaction first.');const t=selected.t;$('adminTxDesc').value=t.desc||'';$('adminTxCategory').value=t.category||'sale';$('adminTxMethod').value=t.method||'Cash';$('adminTxAmount').value=String(Math.abs(Number(t.amount)||0));$('adminTxProfit').value=String(Number(t.profit)||0);$('adminTxCash').value=String(Number(t.splitCash??t.cash)||0);$('adminTxGcash').value=String(Number(t.splitGcash??(typeof t.gcashDelta==='number'?t.gcashDelta:0))||0);const hist=$('adminCorrectionHistory');if(hist)hist.dataset.loadStatus='loaded';alert('Selected '+(selected.archived?'Daily Record':'active')+' transaction details loaded. Review the fields before saving.');}catch(err){console.error('Load selected transaction failed',err);alert('Could not load transaction details: '+(err&&err.message?err.message:'unexpected error'));}}
+$('adminTxLoad').addEventListener('click',loadAdminTx);
+async function jvsrResetRecordsForLaunch(){try{if(!adminUnlocked){alert('Unlock Admin first.');return;}if(!(window.jvsrIsBoss&&window.jvsrIsBoss())){alert('Only the boss account can reset shared test records.');return;}if(!confirm('This will permanently clear transaction records, credit balances, daily history, cash float, GCash opening balances, load totals, and inventory counts in the SHARED Firebase tracker. Product catalog, prices, scent names, and admin password will remain. This affects both devices. Continue?'))return;let typed=prompt('Type START FRESH to confirm the shared test reset:');if(typed!=='START FRESH'){alert('Reset cancelled.');return;}state.transactions=[];state.credits=[];state.history=[];state.cashIn=0;state.cashOut=0;state.cashFloat=0;state.cashFloatDay=dayKey();state.loadSent=0;state.loadCommission=0;state.gcashFees=0;state.gcashOpeningBalances={};state.gcashDailyOpening={};state.inventory={};localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));render();if(typeof fillAdminTxSelect==='function')fillAdminTxSelect();if(typeof window.jvsrCloudSave==='function'){const ok=await window.jvsrCloudSave(state);if(!ok){alert('History was cleared on this device, but Firebase sync was not confirmed. Do not assume the other device is cleared yet.');return;}alert('Shared test history cleared and Firebase save confirmed. Product catalog, prices, scent names, and admin password were kept. Set opening cash float, GCash opening balance, and beginning inventory before testing.');}else{alert('History cleared on this device only; Firebase is not connected.');}}catch(e){console.error('JVSR reset failed',e);alert('Reset failed: '+(e&&e.message?e.message:'Unknown error')+'. No successful Firebase reset was confirmed.');}}
+window.jvsrResetRecordsForLaunch=jvsrResetRecordsForLaunch;
+const jvsrResetButton=$('launchResetBtn');if(jvsrResetButton){jvsrResetButton.addEventListener('click',function(){console.log('JVSR reset button clicked');});}
+$('dateNow').textContent=new Date().toLocaleDateString('en-PH',{weekday:'long',year:'numeric',month:'long',day:'numeric'});$('monthLabel').textContent=monthLabel();$('cashFloatInput').value=state.cashFloatDay===dayKey()?state.cashFloat:'';fillSelects();fillSettings();refreshPrices();fillInventorySelect();fillCustomSaleSelect();refreshAdminAccess();fillAdminTxSelect();render();
+</script>
+
+<script>
+// Bind this control again at the end of the document so the Personal GCash action remains available even if an earlier optional UI initializer fails.
+
+</script>
+<!-- JVSR RICE RETAIL V24 test build: separate GCash In/Out fees and fee collection on GCash-credit repayment. -->
+
+<script>
+// V21 fix: reliably reveal GCash repayment amount/change controls whenever GCash is selected.
+(function(){
+  function syncGcashRepaymentFields(){
+    var method=document.getElementById('creditMethod');
+    var principal=document.getElementById('creditPayment');
+    var received=document.getElementById('creditGcashReceived');
+    var wrap=document.getElementById('creditGcashReceivedWrap');
+    var preview=document.getElementById('creditChangePreview');
+    if(!method||!principal||!received||!wrap||!preview) return;
+    var isGcash=method.value==='GCash';
+    wrap.classList.toggle('hidden',!isGcash);
+    if(isGcash){
+      var owed=Math.max(0,Number(principal.value)||0);
+      var raw=received.value.trim();
+      var got=raw===''?owed:Number(raw);
+      var change=Math.max(0,got-owed);
+      preview.textContent='Change to give from physical cash register: ₱'+change.toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2})+
+        ' · GCash received: ₱'+got.toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
+    } else {
+      preview.textContent='Change to give from cash register: ₱0.00';
+    }
+  }
+  function bindGcashRepaymentFix(){
+    var method=document.getElementById('creditMethod');
+    var principal=document.getElementById('creditPayment');
+    var received=document.getElementById('creditGcashReceived');
+    if(!method||!principal||!received) return;
+    method.addEventListener('change',syncGcashRepaymentFields);
+    principal.addEventListener('input',syncGcashRepaymentFields);
+    received.addEventListener('input',syncGcashRepaymentFields);
+    syncGcashRepaymentFields();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindGcashRepaymentFix);
+  else bindGcashRepaymentFix();
+})();
+</script>
+
+
+<script>
+// V24 test repair: reliable Record Payment handler + fee tracking for GCash-credit repayments.
+(function(){
+  function bindCreditPaymentRepair(){
+    const btn=document.getElementById('payCredit');
+    if(!btn || btn.dataset.v24Bound==='1') return;
+    btn.dataset.v24Bound='1';
+    btn.onclick=async function(){
+      if(btn.dataset.busy==='1') return;
+      const oldText=btn.textContent;
+      btn.dataset.busy='1'; btn.disabled=true; btn.textContent='Recording…';
+      try{
+        const id=String(document.getElementById('creditSelect').value||'');
+        const principalRaw=document.getElementById('creditPayment').value;
+        const amount=Number(principalRaw);
+        const method=document.getElementById('creditMethod').value;
+        const mode=document.getElementById('creditGcashFeeMode').value;
+        const credit=(state.credits||[]).find(x=>String(x.id)===id&&!x.closed);
+        if(!credit){alert('Please select an outstanding customer credit first.');return;}
+        if(principalRaw.trim()===''||!Number.isFinite(amount)||amount<=0){alert('Please enter a valid principal payment amount.');return;}
+        if(amount>Number(credit.amount)+0.001){alert('The principal payment cannot be greater than the customer’s outstanding balance.');return;}
+        let cashPart=0,gcashPart=0,gcashReceived=0,changeOut=0;
+        if(method==='Cash') cashPart=amount;
+        else if(method==='GCash'){
+          const raw=document.getElementById('creditGcashReceived').value.trim();
+          gcashReceived=raw===''?amount:Number(raw);
+          if(!Number.isFinite(gcashReceived)||gcashReceived<amount-0.001){alert('Enter the full amount received through GCash.');return;}
+        }else if(method==='Split Payment'){
+          const parts=collectSplitPayment(amount,'credit payment');
+          if(!parts) return;
+          cashPart=Number(parts.cash)||0; gcashPart=Number(parts.gcash)||0;
+        }
+        const feeEligible=typeof isGcashCredit==='function' && isGcashCredit(credit) && (method==='GCash'||(method==='Split Payment'&&gcashPart>0));
+        const serviceFee=feeEligible?fee(method==='Split Payment'?gcashPart:amount):0;
+        const feeIncludedInGcash=feeEligible&&mode==='included';
+        const feePaidCash=feeEligible&&mode==='cash'?serviceFee:0;
+        if(method==='GCash'){
+          const raw=document.getElementById('creditGcashReceived').value.trim();
+          const minimum=amount+(feeIncludedInGcash?serviceFee:0);
+          gcashReceived=raw===''?minimum:Number(raw);
+          if(!Number.isFinite(gcashReceived)||gcashReceived<minimum-0.001){alert('The GCash amount received must cover the principal'+(feeIncludedInGcash?' and service fee.':'.'));return;}
+          changeOut=Math.max(0,Math.round((gcashReceived-minimum)*100)/100);
+        }else if(method==='Split Payment'){
+          gcashReceived=gcashPart+(feeIncludedInGcash?serviceFee:0);
+        }
+        credit.amount=Math.max(0,Math.round((Number(credit.amount)-amount)*100)/100);
+        credit.paid=(Number(credit.paid)||0)+amount;
+        if(credit.amount<0.005){credit.amount=0;credit.closed=true;}
+        let description='Credit principal payment — '+credit.cust+' ('+method+')';
+        if(feeEligible) description+=' · GCash-transfer fee '+peso(serviceFee)+(feeIncludedInGcash?' included in GCash':' paid separately in cash');
+        if(method==='GCash'&&changeOut>0) description+=' · change returned from physical cash register '+peso(changeOut);
+        addTrans(description,amount,serviceFee,method,cashPart+feePaidCash,'credit-payment',method==='GCash'?gcashReceived:(method==='Split Payment'?gcashReceived:null));
+        const tx=state.transactions[state.transactions.length-1];
+        tx.creditPrincipal=amount;
+        tx.gcashFeeIncluded=!!feeIncludedInGcash;
+        if(method==='Split Payment'){tx.splitCash=cashPart+feePaidCash;tx.splitGcash=gcashReceived;}
+        tx.cashChangeOut=changeOut;
+        document.getElementById('creditPayment').value='';
+        document.getElementById('creditGcashReceived').value='';
+        if(typeof updateCreditGcashFeePreview==='function') updateCreditGcashFeePreview();
+        persist();
+        if(typeof fillAdminTxSelect==='function')fillAdminTxSelect();
+        if(window.jvsrCloudSave){
+          const ok=await window.jvsrCloudSave(state);
+          if(!ok) alert('Payment was recorded on this device, but cloud saving was not confirmed. Check Firebase before relying on the other device.');
+          else alert('Payment recorded. Credit reduced by '+peso(amount)+'. GCash received: '+peso(method==='GCash'?gcashReceived:(method==='Split Payment'?gcashReceived:0))+'. GCash credit fee collected: '+peso(serviceFee)+'. Cash change: '+peso(changeOut)+'.');
+        }else{alert('Payment recorded on this device. Cloud sync is not available in this session.');}
+      }catch(err){
+        console.error('V24 Record Payment repair failed',err);
+        alert('Payment could not be recorded: '+(err&&err.message?err.message:'unexpected error'));
+      }finally{btn.disabled=false;btn.dataset.busy='0';btn.textContent=oldText;}
+    };
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindCreditPaymentRepair);
+  else bindCreditPaymentRepair();
+})();
+</script>
+
+<script>
+// JVSR V25 repair: reliably bind Add to Credit List and report failures visibly.
+(function(){
+  function bindAddCreditRepair(){
+    const btn=document.getElementById('addCredit');
+    if(!btn || typeof state==='undefined') return;
+    btn.onclick=function(event){
+      if(event) event.preventDefault();
+      const nameEl=document.getElementById('creditName');
+      const amountEl=document.getElementById('creditAmount');
+      const noteEl=document.getElementById('creditNote');
+      const cust=(nameEl.value||'').trim();
+      const raw=amountEl.value;
+      const amount=Number(raw);
+      if(!cust){alert('Please enter the customer name.');nameEl.focus();return;}
+      if(raw==='' || !Number.isFinite(amount) || amount<=0){alert('Please enter a valid amount greater than ₱0.');amountEl.focus();return;}
+      const credit={id:Date.now()+Math.random(),cust,note:(noteEl.value||'').trim()||'Credit',amount,original:amount,paid:0,closed:false};
+      try{
+        state.credits=Array.isArray(state.credits)?state.credits:[];
+        state.credits.push(credit);
+        localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));
+        nameEl.value='';amountEl.value='';noteEl.value='';
+        // Refresh the relevant credit UI directly first, so this action remains visible
+        // even if an unrelated dashboard renderer encounters an error.
+        const open=state.credits.filter(c=>!c.closed);
+        const sel=document.getElementById('creditSelect');
+        if(sel){const prior=sel.value;sel.innerHTML='<option value="">Select customer</option>'+open.map(c=>'<option value="'+String(c.id)+'">Credit — '+String(c.cust).replace(/[&<>\"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]))+' — ₱'+(Number(c.amount)||0).toFixed(2)+' due</option>').join('');if(open.some(c=>String(c.id)===prior))sel.value=prior;}
+        const list=document.getElementById('creditList');
+        if(list){list.innerHTML=open.length?open.map(c=>'<div class="item"><strong>📋 Credit: '+String(c.cust).replace(/[&<>\"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]))+'</strong><br>'+String(c.note||'Credit').replace(/[&<>\"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]))+'<br>Balance: <strong>₱'+(Number(c.amount)||0).toFixed(2)+'</strong></div>').join(''):'<p class="small">No outstanding credit records.</p>';}
+        try{if(typeof render==='function')render();}catch(renderErr){console.error('Non-credit dashboard render issue:',renderErr);}
+        try{if(typeof fillAdminTxSelect==='function')fillAdminTxSelect();}catch(adminErr){console.error(adminErr);}
+        if(typeof window.jvsrCloudSave==='function'){
+          Promise.resolve(window.jvsrCloudSave(state)).then(ok=>{if(ok)alert('Credit added for '+cust+'. Shared tracker save confirmed.');else alert('Credit added for '+cust+' on this device, but cloud save was not confirmed. Please check Firebase before relying on the other device.');}).catch(err=>{console.error(err);alert('Credit added on this device, but cloud save failed. Please check Firebase.');});
+        }else alert('Credit added for '+cust+' on this device. Cloud sync is not available in this session.');
+      }catch(err){
+        console.error('Add to Credit List failed:',err);
+        alert('Could not add this credit: '+(err&&err.message?err.message:'unexpected error')+'. Your entry was not confirmed as saved.');
+      }
+    };
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindAddCreditRepair);
+  else bindAddCreditRepair();
+})();
+</script>
+
+
+<script>
+// JVSR V26 repair: robustly bind and verify the GCash Credit Service button.
+(function(){
+  function bindGcashCreditService(){
+    const btn=document.getElementById('saveGcashCredit');
+    if(!btn || typeof state==='undefined') return;
+    btn.onclick=async function(event){
+      if(event) event.preventDefault();
+      if(btn.dataset.busy==='1') return;
+      const amountEl=document.getElementById('gcashCreditAmount');
+      const typeEl=document.getElementById('gcashCreditType');
+      const modeEl=document.getElementById('gcashCreditFeeMode');
+      const preview=document.getElementById('gcashCreditPreview');
+      const raw=amountEl ? amountEl.value : '';
+      const amount=Number(raw);
+      if(raw.trim()==='' || !Number.isFinite(amount) || amount<=0){
+        alert('Please enter a valid GCash transaction amount greater than ₱0.');
+        if(amountEl) amountEl.focus();
+        return;
+      }
+      let customer='';
+      try { customer=window.prompt('Customer name for this GCash credit:'); }
+      catch(e){ alert('Could not open the customer-name prompt. Please try again.'); return; }
+      if(customer===null) return;
+      customer=customer.trim();
+      if(!customer){ alert('Please enter the customer name.'); return; }
+
+      const type=typeEl ? typeEl.value : 'in';
+      const mode=modeEl ? modeEl.value : 'cash';
+      const note=type==='in'?'GCash sent on credit':'GCash cash-out service on credit';
+      const credit={id:Date.now()+Math.random(),cust:customer,note,amount,original:amount,paid:0,closed:false,kind:'gcash-credit',feeMode:mode};
+      const oldText=btn.textContent;
+      btn.disabled=true; btn.dataset.busy='1'; btn.textContent='Recording…';
+      try{
+        state.credits=Array.isArray(state.credits)?state.credits:[];
+        state.transactions=Array.isArray(state.transactions)?state.transactions:[];
+        state.credits.push(credit);
+        if(type==='in'){
+          addTrans('GCash credit issued — '+customer+' (GCash sent; unpaid principal '+peso(amount)+')',amount,0,'Credit',0,'gcash-credit-issued',-amount);
+        }else{
+          addTrans('GCash cash-out service on credit — '+customer+' (unpaid principal '+peso(amount)+')',amount,0,'Credit',0,'gcash-credit-issued',0);
+        }
+        if(amountEl) amountEl.value='';
+        if(typeof updateGcashCreditPreview==='function') updateGcashCreditPreview();
+        // Persist locally and refresh the screen before attempting cloud sync.
+        localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));
+        if(typeof render==='function') render();
+        if(typeof fillAdminTxSelect==='function') fillAdminTxSelect();
+        let cloudOK=false;
+        if(typeof window.jvsrCloudSave==='function'){
+          cloudOK=await window.jvsrCloudSave(state);
+        }
+        if(cloudOK){
+          alert('GCash Credit Service recorded for '+customer+'. Outstanding principal: ₱'+amount.toFixed(2)+'. Shared tracker save confirmed.');
+        }else if(typeof window.jvsrCloudSave==='function'){
+          alert('GCash Credit Service recorded on this device for '+customer+', but cloud save was not confirmed. Check Firebase before relying on the other device.');
+        }else{
+          alert('GCash Credit Service recorded on this device for '+customer+'. Cloud sync is not available in this session.');
+        }
+      }catch(err){
+        console.error('Record GCash Credit Service failed:',err);
+        // If the entry was added before a later UI/cloud error, preserve it locally.
+        try{localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));}catch(storageErr){console.error(storageErr);}
+        alert('Could not fully confirm the GCash Credit Service save: '+(err&&err.message?err.message:'unexpected error')+'. Please check the credit list before trying again.');
+      }finally{
+        btn.disabled=false; btn.dataset.busy='0'; btn.textContent=oldText;
+      }
+    };
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindGcashCreditService);
+  else bindGcashCreditService();
+})();
+</script>
+
+<!-- JVSR V26: TEST COPY ONLY; original website is unchanged. -->
+
+<script>
+// JVSR V27: robust GCash opening-balance editor buttons.
+(function(){
+  function bindGcashBalanceEditor(){
+    var edit=document.getElementById('editGcashOpeningBtn');
+    var save=document.getElementById('saveGcashOpening');
+    var panel=document.getElementById('gcashOpeningEditor');
+    var input=document.getElementById('gcashOpeningInput');
+    if(edit && panel && input && !edit.dataset.v27Bound){
+      edit.dataset.v27Bound='1';
+      edit.addEventListener('click',function(ev){
+        ev.preventDefault();
+        panel.classList.toggle('hidden');
+        try {
+          if(typeof dailyGcashOpening==='function') input.value=String(dailyGcashOpening());
+          else if(typeof state!=='undefined') input.value=String(Number(state.gcashDailyOpening && state.gcashDailyOpening[typeof dayKey==='function'?dayKey():''])||0);
+        } catch(err){ console.error('Could not load GCash opening balance:',err); }
+      });
+    }
+    if(save && panel && input && !save.dataset.v27Bound){
+      save.dataset.v27Bound='1';
+      save.addEventListener('click',function(ev){
+        ev.preventDefault();
+        var raw=input.value;
+        var amount=Number(raw);
+        if(raw.trim()==='' || !Number.isFinite(amount) || amount<0){
+          alert('Please enter a valid opening GCash balance (zero or more).');
+          input.focus(); return;
+        }
+        try {
+          if(typeof state==='undefined' || typeof dayKey!=='function'){
+            alert('The tracker did not initialize correctly. Reload the page and try again.');
+            return;
+          }
+          state.gcashDailyOpening=state.gcashDailyOpening||{};
+          state.gcashDailyOpening[dayKey()]=amount;
+          if(typeof persist==='function') persist();
+          panel.classList.add('hidden');
+          if(typeof render==='function') render();
+          if(typeof window.jvsrCloudSave==='function'){
+            Promise.resolve(window.jvsrCloudSave(state)).then(function(ok){
+              alert(ok ? 'Opening GCash balance saved and cloud save confirmed. Closing balance remains automatic.' : 'Opening GCash balance saved on this device, but cloud saving was not confirmed.');
+            }).catch(function(){alert('Opening GCash balance saved on this device, but cloud saving failed.');});
+          } else {
+            alert('Opening GCash balance saved on this device. Cloud sync is not available in this session.');
+          }
+        } catch(err){
+          console.error('Saving GCash opening balance failed:',err);
+          alert('Could not save the opening GCash balance: '+(err && err.message ? err.message : 'unexpected error'));
+        }
+      });
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindGcashBalanceEditor);
+  else bindGcashBalanceEditor();
+})();
+</script>
+
+<script>
+// V29 fallback: capture the opening cash-float button even if the main initializer failed.
+(function(){
+  function attachCashFloatFallback(){
+    var btn=document.getElementById('saveCashFloat');
+    if(!btn || btn.dataset.v29Bound==='1') return;
+    btn.dataset.v29Bound='1';
+    btn.addEventListener('click',function(ev){
+      ev.preventDefault(); ev.stopImmediatePropagation();
+      var input=document.getElementById('cashFloatInput');
+      var raw=input ? String(input.value) : '';
+      var value=Number(raw);
+      if(raw.trim()==='' || !Number.isFinite(value) || value<0){
+        alert('Please enter a valid opening cash float (₱0 or more).');
+        if(input) input.focus(); return;
+      }
+      try {
+        if(typeof state==='undefined' || !state){
+          alert('The tracker script did not initialize. Please reload the page; if this continues, use the original tracker while we repair the page startup.');
+          return;
+        }
+        state.cashFloat=value;
+        if(typeof dayKey==='function') state.cashFloatDay=dayKey();
+        else state.cashFloatDay=new Date().toISOString().slice(0,10);
+        localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));
+        var saved=document.getElementById('cashFloatSaved');
+        if(saved) saved.textContent='₱'+value.toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
+        var balance=document.getElementById('registerBalance');
+        if(typeof render==='function') render();
+        if(typeof window.jvsrCloudSave==='function'){
+          Promise.resolve(window.jvsrCloudSave(state)).then(function(ok){
+            alert(ok===true?'Opening cash float saved locally and cloud save confirmed.': 'Opening cash float saved on this device, but cloud saving was not confirmed. Check the other device before relying on sync.');
+          }).catch(function(err){console.error('V29 cash float cloud save failed',err);alert('Opening cash float saved on this device, but cloud saving failed.');});
+        } else {
+          alert('Opening cash float saved on this device. Cloud sync is not available in this session.');
+        }
+      } catch(err) {
+        console.error('V29 cash float save failed',err);
+        alert('Opening cash float could not be saved: '+(err&&err.message?err.message:'unexpected error'));
+      }
+    },true);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',attachCashFloatFallback);
+  else attachCashFloatFallback();
+})();
+</script>
+
+
+<script>
+// V31 isolated fallback for Save Cash Count only.
+// Runs in capture phase so it works even if the main onclick was never attached.
+(function(){
+  function attachCashCountFallback(){
+    var btn=document.getElementById('saveCashCountBtn');
+    if(!btn || btn.dataset.v31Bound==='1') return;
+    btn.dataset.v31Bound='1';
+    btn.addEventListener('click', async function(ev){
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      if(btn.dataset.busy==='1') return;
+      var input=document.getElementById('actualCashCountedInput');
+      var result=document.getElementById('cashCountResult');
+      var raw=input ? String(input.value).trim() : '';
+      var amount=Number(raw);
+      if(raw==='' || !Number.isFinite(amount) || amount<0){
+        alert('Please enter a valid actual cash count of ₱0 or more.');
+        if(input) input.focus();
+        return;
+      }
+      if(typeof state==='undefined' || !state){
+        alert('The tracker did not initialize, so the cash count cannot be saved. Reload the page and try again.');
+        return;
+      }
+      var oldText=btn.textContent;
+      btn.dataset.busy='1'; btn.disabled=true; btn.textContent='Saving…';
+      try{
+        state.dailyClosings=state.dailyClosings && typeof state.dailyClosings==='object' ? state.dailyClosings : {};
+        var key=typeof dayKey==='function' ? dayKey() : new Date().toISOString().slice(0,10);
+        var closing=state.dailyClosings[key] || {};
+        closing.actualCashCounted=amount;
+        var expected=0;
+        if(typeof dailyCashRegisterBalance==='function') expected=Number(dailyCashRegisterBalance(key))||0;
+        else if(typeof state.cashFloat==='number') expected=state.cashFloat;
+        closing.cashDifference=amount-expected;
+        state.dailyClosings[key]=closing;
+        localStorage.setItem('jvsr_final_clean_state',JSON.stringify(state));
+        if(result){
+          var diff=closing.cashDifference;
+          result.textContent='Actual cash: ₱'+amount.toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2})+
+            ' · Expected: ₱'+expected.toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2})+
+            ' · '+(Math.abs(diff)<0.005?'Balanced':diff>0?'Over by':'Short by')+
+            ' ₱'+Math.abs(diff).toLocaleString('en-PH',{minimumFractionDigits:2,maximumFractionDigits:2});
+        }
+        if(typeof render==='function') render();
+        if(typeof updateCashCountResult==='function') updateCashCountResult();
+        var cloudResult=null;
+        if(typeof window.jvsrCloudSave==='function'){
+          try { cloudResult=await window.jvsrCloudSave(state); }
+          catch(cloudErr){ console.error('Cash count cloud save failed',cloudErr); cloudResult=false; }
+        }
+        if(cloudResult===true) alert('Cash count saved. Shared cloud save confirmed.');
+        else if(cloudResult===false) alert('Cash count saved on this device, but shared cloud save was not confirmed. Check Firebase before relying on the other device.');
+        else alert('Cash count saved on this device. Cloud sync is not available in this session.');
+      }catch(err){
+        console.error('V31 Save Cash Count failed:',err);
+        alert('Cash count could not be fully saved: '+(err&&err.message?err.message:'unexpected error'));
+      }finally{
+        btn.disabled=false; btn.dataset.busy='0'; btn.textContent=oldText;
+      }
+    }, true);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',attachCashCountFallback);
+  else attachCashCountFallback();
+})();
+</script>
+
+</body></html>
